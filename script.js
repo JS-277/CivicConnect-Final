@@ -3,7 +3,7 @@
    FRONTEND - JAVA BACKEND - MYSQL
    ===================================================== */
 
-const API_URL = "http://localhost:8080/api/complaints";
+const API_URL = "https://civicconnect-prototype-production.up.railway.app/api/complaints";
 
 
 /* =====================================================

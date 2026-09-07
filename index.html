@@ -17,11 +17,16 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- =====================================================
-         OPEN LOGIN PAGE FIRST
-         ===================================================== -->
-    <script>
+     LOGIN PROTECTION
+     ===================================================== -->
+<script>
+    const civicLoggedIn =
+        sessionStorage.getItem("civicconnectLoggedIn");
+
+    if (civicLoggedIn !== "true") {
         window.location.replace("login.html");
-    </script>
+    }
+</script>
 
 </head>
 

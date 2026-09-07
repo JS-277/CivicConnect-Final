@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CivicConnect | Citizen Profile</title>
+
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        :root {
+            --blue: #216FE8;
+            --blue-dark: #185FCB;
+            --navy: #17233C;
+            --text: #42526B;
+            --muted: #718096;
+            --background: #F4F8FD;
+            --white: #FFFFFF;
+            --border: #D8E3F0;
+            --soft-blue: #E8F1FF;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            background: var(--background);
+
+            color: var(--navy);
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+
+            height: 74px;
+
+            background: white;
+
+            border-bottom: 1px solid #E4EBF3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+            color: var(--navy);
+        }
+
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 11px;
+
+            background: var(--blue);
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .logout {
+
+            border: 1px solid #D9E6F7;
+
+            background: white;
+
+            color: var(--blue);
+
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .logout:hover {
+
+            background: var(--soft-blue);
+
+            border-color: #C8DCF7;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 950px;
+
+            margin: 55px auto;
+
+            padding: 0 22px;
+        }
+
+
+        /* =========================
+           WELCOME
+        ========================== */
+
+        .welcome {
+
+            margin-bottom: 25px;
+        }
+
+
+        .welcome-label {
+
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            background: var(--soft-blue);
+
+            color: var(--blue);
+
+            border-radius: 50px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .welcome h1 {
+
+            margin-top: 15px;
+
+            font-size: 34px;
+
+            line-height: 1.2;
+
+            letter-spacing: -0.8px;
+
+            color: var(--navy);
+        }
+
+
+        .welcome p {
+
+            margin-top: 7px;
+
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           PROFILE CARD
+        ========================== */
+
+        .profile-card {
+
+            background: white;
+
+            border: 1px solid #E1E9F2;
+
+            border-radius: 22px;
+
+            padding: 31px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(23, 35, 60, 0.07);
+        }
+
+
+        /* =========================
+           PROFILE TOP
+        ========================== */
+
+        .profile-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid #EDF2F7;
+        }
+
+
+        .avatar {
+
+            width: 66px;
+
+            height: 66px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: var(--soft-blue);
+
+            color: var(--blue);
+
+            border: 1px solid #D6E5FA;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+
+            font-weight: 800;
+        }
+
+
+        .profile-top h2 {
+
+            font-size: 20px;
+
+            color: var(--navy);
+        }
+
+
+        .citizen-id {
+
+            margin-top: 6px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            font-weight: 600;
+        }
+
+
+        .verified {
+
+            margin-left: auto;
+
+            padding: 8px 12px;
+
+            border-radius: 20px;
+
+            background: var(--soft-blue);
+
+            color: var(--blue);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           DETAILS
+        ========================== */
+
+        .details {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        .detail {
+
+            background: #F8FAFD;
+
+            border: 1px solid #E8EEF5;
+
+            border-radius: 12px;
+
+            padding: 17px;
+        }
+
+
+        .detail small {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #94A3B8;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .detail strong {
+
+            color: var(--navy);
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           CIVIC POINTS
+        ========================== */
+
+        .points {
+
+            color: var(--blue) !important;
+        }
+
+
+        /* =========================
+           INFO
+        ========================== */
+
+        .profile-info {
+
+            margin-top: 20px;
+
+            padding: 14px 16px;
+
+            border-radius: 11px;
+
+            background: var(--soft-blue);
+
+            color: #49617E;
+
+            font-size: 11px;
+
+            line-height: 1.65;
+        }
+
+
+        .profile-info strong {
+
+            color: var(--blue);
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================== */
+
+        .actions {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 27px;
+        }
+
+
+        .btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 45px;
+
+            padding: 0 20px;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+
+        .primary {
+
+            background: var(--blue);
+
+            color: white;
+
+            box-shadow:
+                0 7px 18px
+                rgba(33, 111, 232, 0.15);
+        }
+
+
+        .primary:hover {
+
+            background: var(--blue-dark);
+
+            transform: translateY(-1px);
+        }
+
+
+        .secondary {
+
+            background: white;
+
+            color: var(--blue);
+
+            border: 1px solid #D5E3F3;
+        }
+
+
+        .secondary:hover {
+
+            background: var(--soft-blue);
+
+            border-color: #C7DAF2;
+        }
+
+
+        /* =========================
+           FOOT NOTE
+        ========================== */
+
+        .bottom-note {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 10px;
+
+            color: #94A3B8;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+
+                padding: 0 20px;
+            }
+
+
+            .container {
+
+                margin-top: 35px;
+            }
+
+
+            .welcome h1 {
+
+                font-size: 28px;
+            }
+
+
+            .profile-card {
+
+                padding: 23px;
+            }
+
+
+            .profile-top {
+
+                align-items: flex-start;
+
+                flex-wrap: wrap;
+            }
+
+
+            .verified {
+
+                margin-left: 0;
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+
+            .details {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .actions {
+
+                flex-direction: column;
+            }
+
+
+            .btn {
+
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                C
+            </div>
+
+            <span>
+                CivicConnect
+            </span>
+
+        </div>
+
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <div class="welcome">
+
+            <span class="welcome-label">
+                CITIZEN PROFILE
+            </span>
+
+
+            <h1 id="welcomeText">
+                Welcome
+            </h1>
+
+
+            <p>
+                Your CivicConnect citizen account
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             PROFILE CARD
+        ========================= -->
+
+        <section class="profile-card">
+
+
+            <div class="profile-top">
+
+
+                <!-- Avatar -->
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    C
+
+                </div>
+
+
+                <!-- Name -->
+
+                <div>
+
+                    <h2 id="citizenName">
+                        Citizen
+                    </h2>
+
+
+                    <p
+                        class="citizen-id"
+                        id="citizenId">
+
+                        Citizen ID
+
+                    </p>
+
+                </div>
+
+
+                <!-- Verification -->
+
+                <div class="verified">
+
+                    ✓ Mobile Verified
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 DETAILS
+            ========================== -->
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <small>
+                        Full Name
+                    </small>
+
+                    <strong id="profileName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Mobile Number
+                    </small>
+
+                    <strong id="citizenPhone">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Citizen ID
+                    </small>
+
+                    <strong id="profileCitizenId">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Civic Points
+                    </small>
+
+                    <strong
+                        id="civicPoints"
+                        class="points">
+
+                        0 Points
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 INFORMATION
+            ========================== -->
+
+            <div class="profile-info">
+
+                <strong>✓ Account connected.</strong>
+
+                Your unique Citizen ID connects your
+                account with your CivicConnect complaints.
+                Your name is not used as the unique identifier.
+
+            </div>
+
+
+
+            <!-- =========================
+                 ACTION BUTTONS
+            ========================== -->
+
+            <div class="actions">
+
+
+                <!-- GO TO HOME PAGE -->
+
+                <a
+                    href="index.html"
+                    class="btn primary">
+
+                    Report a Grievance
+
+                </a>
+
+
+                <!-- GO TO TRACKING SECTION -->
+
+                <a
+                    href="index.html#track"
+                    class="btn secondary">
+
+                    Track Complaint
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <p class="bottom-note">
+
+            CivicConnect • Smart Governance & Citizen Services
+
+        </p>
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           CHECK LOGIN
+        ========================== */
+
+        const loggedIn =
+            sessionStorage.getItem(
+                "civicconnectLoggedIn"
+            );
+
+
+        const storedAccount =
+            localStorage.getItem(
+                "civicconnectCitizen"
+            );
+
+
+        if (!loggedIn || !storedAccount) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =========================
+           LOAD CITIZEN
+        ========================== */
+
+        let citizen;
+
+        try {
+
+            citizen =
+                JSON.parse(storedAccount);
+
+        } catch (error) {
+
+            localStorage.removeItem(
+                "civicconnectCitizen"
+            );
+
+            sessionStorage.clear();
+
+            window.location.href =
+                "login.html";
+        }
+
+
+        /* =========================
+           DISPLAY CITIZEN
+        ========================== */
+
+        if (citizen) {
+
+
+            document.getElementById(
+                "welcomeText"
+            ).textContent =
+                "Welcome, " + citizen.name;
+
+
+            document.getElementById(
+                "citizenName"
+            ).textContent =
+                citizen.name;
+
+
+            document.getElementById(
+                "profileName"
+            ).textContent =
+                citizen.name;
+
+
+            document.getElementById(
+                "citizenPhone"
+            ).textContent =
+                citizen.phone;
+
+
+            document.getElementById(
+                "citizenId"
+            ).textContent =
+                citizen.citizenId;
+
+
+            document.getElementById(
+                "profileCitizenId"
+            ).textContent =
+                citizen.citizenId;
+
+
+            document.getElementById(
+                "civicPoints"
+            ).textContent =
+                (citizen.civicPoints || 0) +
+                " Points";
+
+
+            document.getElementById(
+                "avatar"
+            ).textContent =
+                citizen.name
+                    .charAt(0)
+                    .toUpperCase();
+
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================== */
+
+        function logout() {
+
+            sessionStorage.removeItem(
+                "civicconnectLoggedIn"
+            );
+
+
+            sessionStorage.removeItem(
+                "civicconnectCitizenId"
+            );
+
+
+            window.location.href =
+                "login.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

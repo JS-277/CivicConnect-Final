@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CivicConnect - Citizen Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+            background: #eef3f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            color: #092b55;
+        }
+
+        /* ================= MAIN CONTAINER ================= */
+
+        .login-container {
+            width: 100%;
+            max-width: 1330px;
+            min-height: 760px;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            box-shadow: 0 25px 70px rgba(20, 65, 110, 0.15);
+        }
+
+        /* ================= LEFT PANEL ================= */
+
+        .left-panel {
+            position: relative;
+            padding: 62px;
+            color: white;
+            overflow: hidden;
+
+            background: linear-gradient(
+                135deg,
+                #0f4c81 0%,
+                #1677c8 48%,
+                #2563eb 100%
+            );
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-panel::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 50%;
+            top: -140px;
+            right: -110px;
+        }
+
+        .left-panel::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            bottom: -180px;
+            left: -130px;
+        }
+
+        /* ================= LOGO ================= */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: white;
+            color: #0878c9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .logo-name {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        /* ================= LEFT CONTENT ================= */
+
+        .left-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 145px;
+            max-width: 570px;
+        }
+
+        .portal-badge {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 30px;
+            padding: 10px 19px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 34px;
+        }
+
+        .left-content h1 {
+            font-size: 58px;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+        }
+
+        .left-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.92);
+            max-width: 520px;
+        }
+
+        /* ================= LEFT FOOTER ================= */
+
+        .left-footer {
+            position: absolute;
+            z-index: 3;
+            bottom: 62px;
+            left: 62px;
+            right: 62px;
+
+            display: flex;
+            align-items: center;
+            gap: 17px;
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .check-box {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        /* ================= RIGHT PANEL ================= */
+
+        .right-panel {
+            padding: 66px 78px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-panel h2 {
+            font-size: 38px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #58708c;
+            font-size: 16px;
+            margin-bottom: 34px;
+        }
+
+        /* ================= TABS ================= */
+
+        .tabs {
+            width: 100%;
+            background: #edf2f7;
+            padding: 6px;
+            border-radius: 16px;
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            width: 50%;
+            border: none;
+            background: transparent;
+            padding: 16px 10px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            color: #46617d;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #0878c9;
+            box-shadow: 0 4px 12px rgba(30, 70, 110, 0.10);
+        }
+
+        /* ================= MESSAGES ================= */
+
+        .message {
+            display: none;
+            padding: 13px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #e8f7f0;
+            color: #087a50;
+        }
+
+        .message.error {
+            background: #fff0f0;
+            color: #c0392b;
+        }
+
+        /* ================= FORMS ================= */
+
+        form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #082b55;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 56px;
+            border: 1px solid #cfdae7;
+            border-radius: 14px;
+            padding: 0 17px;
+            outline: none;
+            font-family: inherit;
+            font-size: 15px;
+            color: #173653;
+            background: white;
+            transition: 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #2679df;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+
+        /* ================= PASSWORD ================= */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 55px;
+        }
+
+        .eye-button {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 36px;
+            height: 36px;
+
+            border: none;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+            color: #0878c9;
+            padding: 0;
+        }
+
+        .eye-button:hover {
+            color: #1d4ed8;
+        }
+
+        .eye-button svg {
+            width: 21px;
+            height: 21px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ================= FORGOT PASSWORD ================= */
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 26px;
+
+            color: #0785a4;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= PRIMARY BUTTON ================= */
+
+        .primary-button {
+            width: 100%;
+            height: 58px;
+            border: none;
+            border-radius: 14px;
+
+            background: #2563eb;
+            color: white;
+
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+
+            transition: 0.2s ease;
+        }
+
+        .primary-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .primary-button:active {
+            transform: translateY(0);
+        }
+
+        /* ================= TERMS ================= */
+
+        .terms {
+            text-align: center;
+            color: #8092a7;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* ================= BACK LINK ================= */
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 28px;
+
+            color: #46617d;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #2563eb;
+        }
+
+        /* ================= SIGNUP ================= */
+
+        .signup-form {
+            display: none;
+        }
+
+        .signup-form.active {
+            display: block;
+        }
+
+        .login-form.hidden {
+            display: none;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .login-container {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+            }
+
+            .left-panel {
+                min-height: 430px;
+                padding: 42px;
+            }
+
+            .left-content {
+                margin-top: 70px;
+            }
+
+            .left-content h1 {
+                font-size: 44px;
+            }
+
+            .left-footer {
+                left: 42px;
+                bottom: 35px;
+            }
+
+            .right-panel {
+                padding: 50px 42px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .login-container {
+                border-radius: 25px;
+            }
+
+            .left-panel {
+                min-height: 390px;
+                padding: 30px;
+            }
+
+            .logo-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 25px;
+            }
+
+            .logo-name {
+                font-size: 23px;
+            }
+
+            .left-content {
+                margin-top: 55px;
+            }
+
+            .left-content h1 {
+                font-size: 37px;
+                letter-spacing: -1px;
+            }
+
+            .left-content p {
+                font-size: 14px;
+            }
+
+            .left-footer {
+                left: 30px;
+                right: 30px;
+                bottom: 28px;
+                font-size: 12px;
+            }
+
+            .check-box {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .right-panel {
+                padding: 38px 25px;
+            }
+
+            .right-panel h2 {
+                font-size: 31px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- ================= LEFT SIDE ================= -->
+
+        <section class="left-panel">
+
+            <div class="logo">
+                <div class="logo-icon">C</div>
+                <div class="logo-name">CivicConnect</div>
+            </div>
+
+            <div class="left-content">
+
+                <div class="portal-badge">
+                    CITIZEN PORTAL
+                </div>
+
+                <h1>
+                    Your civic voice,
+                    connected.
+                </h1>
+
+                <p>
+                    Sign in to report grievances, manage your complaints
+                    and stay connected with their progress.
+                </p>
+
+            </div>
+
+            <div class="left-footer">
+
+                <div class="check-box">
+                    ✓
+                </div>
+
+                <span>
+                    Your citizen profile keeps your complaint history connected.
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RIGHT SIDE ================= -->
+
+        <section class="right-panel">
+
+            <h2 id="formTitle">
+                Welcome back
+            </h2>
+
+            <p class="subtitle" id="formSubtitle">
+                Sign in to your CivicConnect account.
+            </p>
+
+
+            <!-- ================= TABS ================= -->
+
+            <div class="tabs">
+
+                <button
+                    type="button"
+                    class="tab active"
+                    id="loginTab"
+                    onclick="showLogin()">
+                    Login
+                </button>
+
+                <button
+                    type="button"
+                    class="tab"
+                    id="signupTab"
+                    onclick="showSignup()">
+                    Create Account
+                </button>
+
+            </div>
+
+
+            <!-- ================= MESSAGE ================= -->
+
+            <div
+                id="loginMessage"
+                class="message">
+            </div>
+
+            <div
+                id="signupMessage"
+                class="message">
+            </div>
+
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <form
+                id="loginForm"
+                class="login-form"
+                onsubmit="handleLogin(event)">
+
+                <div class="form-group">
+
+                    <label for="loginPhone">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="loginPhone"
+                        placeholder="Enter your mobile number"
+                        maxlength="10"
+                        autocomplete="tel"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="eye-button"
+                            onclick="togglePassword('loginPassword', this)"
+                            aria-label="Show password">
+
+                            <!-- Eye icon -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+
+                                <path
+                                    d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3">
+                                </circle>
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    class="forgot"
+                    onclick="forgotPassword(); return false;">
+                    Forgot password?
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="primary-button">
+                    Login to CivicConnect
+                </button>
+
+
+                <p class="terms">
+                    By continuing, you agree to use CivicConnect responsibly
+                    and provide accurate information.
+                </p>
+
+            </form>
+
+
+            <!-- ================= SIGNUP FORM ================= -->
+
+            <form
+                id="signupForm"
+                class="signup-form"
+                onsubmit="handleSignup(event)">
+
+                <div class="form-group">
+
+                    <label for="signupName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="signupPhone">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="signupPhone"
+                        placeholder="Enter your 10-digit mobile number"
+                        maxlength="10"
+                        autocomplete="tel"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="signupPassword">
+                        Create Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="eye-button"
+                            onclick="togglePassword('signupPassword', this)"
+                            aria-label="Show password">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+
+                                <path
+                                    d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3">
+                                </circle>
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button">
+                    Create CivicConnect Account
+                </button>
+
+
+                <p class="terms">
+                    Your account helps keep your complaints
+                    connected to your Citizen ID.
+                </p>
+
+            </form>
+
+
+            <!-- ================= BACK ================= -->
+
+            <a
+                href="index.html"
+                class="back-link">
+                ← Back to CivicConnect
+            </a>
+
+        </section>
+
+    </div>
+
+
+    <!-- Your existing JavaScript -->
+
+    <script src="citizen.js"></script>
+
+
+    <!-- Eye icon functionality -->
+
+    <script>
+
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+
+            if (!input) {
+                return;
+            }
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+                button.innerHTML = `
+                    <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+
+                        <path
+                            d="M3 3l18 18">
+                        </path>
+
+                        <path
+                            d="M10.6 10.6a2 2 0 0 0 2.8 2.8">
+                        </path>
+
+                        <path
+                            d="M9.9 4.2A10.8 10.8 0 0 1 12 4
+                               c6.5 0 10 8 10 8
+                               a17.7 17.7 0 0 1-3.2 4.2">
+                        </path>
+
+                        <path
+                            d="M6.6 6.6C3.8 8.5 2 12 2 12
+                               s3.5 8 10 8
+                               a10.8 10.8 0 0 0 2.1-.2">
+                        </path>
+
+                    </svg>
+                `;
+
+            } else {
+
+                input.type = "password";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+                button.innerHTML = `
+                    <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+
+                        <path
+                            d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
+                        </path>
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="3">
+                        </circle>
+
+                    </svg>
+                `;
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

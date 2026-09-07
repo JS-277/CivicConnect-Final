@@ -2,479 +2,553 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CivicConnect - Admin Dashboard</title>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-
         body {
-            font-family: "Inter", sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background: #f4f7fb;
-            color: #10213b;
+            color: #102a43;
         }
 
+        /* ================= HEADER ================= */
 
-        /* ================= NAVBAR ================= */
-
-        .navbar {
-            background: white;
-            min-height: 72px;
-            padding: 0 6%;
+        header {
+            height: 68px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5eaf0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #e5eaf1;
+            padding: 0 5.5%;
         }
 
-
-        .logo {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: 800;
+            gap: 14px;
+            font-size: 25px;
+            font-weight: 700;
+            color: #111827;
         }
 
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: #1769e0;
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: #1769d5;
             color: white;
-            border-radius: 10px;
+            border-radius: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
+            font-size: 25px;
+            font-weight: 700;
         }
-
 
         .admin-label {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
-            color: #6e7f96;
             letter-spacing: 1px;
+            color: #5b6f86;
         }
-
 
         /* ================= MAIN ================= */
 
-        .container {
-            width: 88%;
-            max-width: 1250px;
-            margin: 45px auto;
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 58px 30px 70px;
         }
 
-
-        .page-heading {
-            margin-bottom: 30px;
-        }
-
-
-        .page-heading span {
-            color: #1769e0;
-            font-size: 12px;
+        .eyebrow {
+            color: #1464d2;
+            font-size: 14px;
             font-weight: 800;
             letter-spacing: 2px;
+            margin-bottom: 12px;
         }
 
-
-        .page-heading h1 {
-            margin-top: 8px;
-            font-size: 34px;
-            font-weight: 800;
+        h1 {
+            font-size: 40px;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            color: #102a43;
         }
 
-
-        .page-heading p {
-            margin-top: 8px;
-            color: #718096;
+        .subtitle {
+            color: #647b94;
+            font-size: 19px;
+            margin-bottom: 36px;
         }
 
-
-        /* ================= STATS ================= */
+        /* ================= STAT CARDS ================= */
 
         .stats {
             display: grid;
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 18px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 34px;
         }
-
 
         .stat-card {
             background: white;
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid #e6ebf2;
-            box-shadow:
-                0 8px 25px rgba(20, 45, 80, 0.05);
+            border: 1px solid #e4eaf1;
+            border-radius: 18px;
+            padding: 27px 29px;
+            box-shadow: 0 8px 25px rgba(16, 42, 67, 0.04);
         }
-
 
         .stat-title {
-            color: #718096;
-            font-size: 13px;
+            color: #657b93;
+            font-size: 14px;
             font-weight: 600;
+            margin-bottom: 12px;
         }
-
 
         .stat-number {
-            margin-top: 8px;
-            font-size: 30px;
+            font-size: 36px;
             font-weight: 800;
+            color: #102a43;
         }
 
+        .stat-card.pending {
+            border-top: 4px solid #f59e0b;
+        }
+
+        .stat-card.progress {
+            border-top: 4px solid #1769d5;
+        }
+
+        .stat-card.resolved {
+            border-top: 4px solid #16a34a;
+        }
 
         /* ================= TOOLBAR ================= */
 
         .toolbar {
             background: white;
-            border-radius: 16px;
+            border: 1px solid #e4eaf1;
+            border-radius: 18px;
             padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            border: 1px solid #e6ebf2;
+            display: grid;
+            grid-template-columns: 1fr 220px auto;
+            gap: 14px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 25px rgba(16, 42, 67, 0.04);
         }
 
-
-        .search-box {
-            flex: 1;
-        }
-
-
-        .search-box input,
-        .filter-box select {
-            width: 100%;
-            padding: 13px 15px;
-            border: 1px solid #d7dfeb;
-            border-radius: 9px;
-            font-family: inherit;
-            font-size: 14px;
+        .search,
+        .filter {
+            height: 52px;
+            border: 1px solid #d4deea;
+            border-radius: 11px;
+            padding: 0 16px;
+            font-size: 15px;
             outline: none;
+            background: white;
+            color: #102a43;
         }
 
-
-        .search-box input:focus,
-        .filter-box select:focus {
-            border-color: #1769e0;
+        .search:focus,
+        .filter:focus {
+            border-color: #1769d5;
+            box-shadow: 0 0 0 3px rgba(23, 105, 213, 0.10);
         }
-
-
-        .filter-box {
-            width: 210px;
-        }
-
 
         .refresh-btn {
-            padding: 13px 20px;
+            height: 52px;
+            padding: 0 25px;
             border: none;
-            border-radius: 9px;
-            background: #1769e0;
+            border-radius: 11px;
+            background: #1769d5;
             color: white;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
         }
 
-
         .refresh-btn:hover {
-            opacity: 0.9;
+            background: #1258b3;
         }
-
 
         /* ================= TABLE ================= */
 
         .table-card {
             background: white;
-            border-radius: 16px;
-            border: 1px solid #e6ebf2;
+            border: 1px solid #e4eaf1;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow:
-                0 8px 25px rgba(20, 45, 80, 0.05);
+            box-shadow: 0 8px 25px rgba(16, 42, 67, 0.04);
         }
-
 
         .table-wrapper {
             overflow-x: auto;
         }
 
-
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 950px;
+            min-width: 1000px;
         }
-
 
         th {
             background: #f8fafc;
-            text-align: left;
-            padding: 16px;
-            font-size: 12px;
-            color: #718096;
+            color: #60758d;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 12px;
+            letter-spacing: .5px;
+            padding: 18px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e7edf3;
         }
-
 
         td {
-            padding: 17px 16px;
-            border-top: 1px solid #edf1f6;
+            padding: 19px 20px;
+            border-bottom: 1px solid #edf1f5;
             font-size: 14px;
+            vertical-align: middle;
         }
 
+        tr:last-child td {
+            border-bottom: none;
+        }
 
         .complaint-id {
+            color: #1769d5;
             font-weight: 800;
-            color: #1769e0;
+            font-size: 15px;
         }
-
 
         .citizen-name {
             font-weight: 700;
+            color: #172b4d;
         }
 
-
-        .category {
-            color: #596b82;
+        .issue-title {
+            max-width: 280px;
+            color: #536b84;
+            line-height: 1.45;
         }
 
+        .area-text {
+            color: #536b84;
+        }
 
         /* ================= STATUS ================= */
 
         .status-select {
-            border: 1px solid #d7dfeb;
-            border-radius: 8px;
-            padding: 9px 10px;
-            font-family: inherit;
-            font-weight: 600;
-            cursor: pointer;
+            min-width: 145px;
+            height: 40px;
+            border: 1px solid #d6e0eb;
+            border-radius: 9px;
+            padding: 0 10px;
             background: white;
-        }
-
-
-        .status-select:focus {
-            outline: none;
-            border-color: #1769e0;
-        }
-
-
-        .view-btn {
-            padding: 9px 14px;
-            border: none;
-            border-radius: 8px;
-            background: #eef4ff;
-            color: #1769e0;
             font-weight: 700;
             cursor: pointer;
         }
 
-
-        /* ================= EMPTY ================= */
-
-        .empty {
-            text-align: center;
-            padding: 60px 20px;
-            color: #718096;
+        .status-select.pending {
+            color: #a16207;
         }
 
+        .status-select.progress {
+            color: #1769d5;
+        }
+
+        .status-select.resolved {
+            color: #15803d;
+        }
+
+        .view-btn {
+            border: none;
+            background: #edf4ff;
+            color: #1769d5;
+            padding: 11px 18px;
+            border-radius: 9px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            background: #dceaff;
+        }
+
+        .empty {
+            padding: 60px 20px;
+            text-align: center;
+            color: #71859a;
+            font-size: 16px;
+        }
 
         /* ================= MODAL ================= */
 
         .modal {
             position: fixed;
             inset: 0;
-            background: rgba(10, 25, 45, 0.45);
+            background: rgba(15, 31, 48, 0.55);
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 25px;
             z-index: 1000;
         }
-
 
         .modal.show {
             display: flex;
         }
 
-
         .modal-card {
-            background: white;
             width: 100%;
-            max-width: 650px;
-            border-radius: 18px;
-            padding: 30px;
-            max-height: 90vh;
+            max-width: 850px;
+            max-height: 92vh;
             overflow-y: auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .22);
         }
 
-
         .modal-header {
+            padding: 25px 28px;
+            border-bottom: 1px solid #e8edf2;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 2;
         }
-
 
         .modal-header h2 {
             font-size: 23px;
+            color: #102a43;
         }
 
+        .modal-id {
+            color: #1769d5;
+            font-size: 14px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
 
         .close-btn {
+            width: 38px;
+            height: 38px;
             border: none;
-            background: #f1f4f8;
-            width: 35px;
-            height: 35px;
             border-radius: 50%;
+            background: #f1f5f9;
+            color: #52677d;
+            font-size: 25px;
             cursor: pointer;
-            font-size: 18px;
         }
 
+        .close-btn:hover {
+            background: #e5ebf2;
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        /* ================= DETAIL SECTIONS ================= */
+
+        .detail-section {
+            margin-bottom: 28px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            color: #1769d5;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5ebf1;
+            margin-bottom: 17px;
+        }
 
         .detail-grid {
             display: grid;
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 18px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         }
 
-
-        .detail {
+        .detail-item {
             background: #f8fafc;
-            padding: 15px;
-            border-radius: 10px;
+            border: 1px solid #e7edf3;
+            border-radius: 11px;
+            padding: 14px 16px;
         }
-
-
-        .detail.full {
-            grid-column: 1 / -1;
-        }
-
 
         .detail-label {
             font-size: 11px;
-            color: #718096;
-            text-transform: uppercase;
+            color: #71859a;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
             margin-bottom: 6px;
         }
 
-
         .detail-value {
             font-size: 14px;
+            color: #1f344d;
             font-weight: 600;
             line-height: 1.5;
+            word-break: break-word;
         }
 
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .description-box {
+            background: #f8fafc;
+            border: 1px solid #e7edf3;
+            border-radius: 12px;
+            padding: 18px;
+            color: #334e68;
+            line-height: 1.65;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        /* ================= STATUS ACTION ================= */
+
+        .action-box {
+            background: #f4f8ff;
+            border: 1px solid #d9e7fb;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .modal-status {
+            height: 48px;
+            border: 1px solid #ccd9e7;
+            border-radius: 10px;
+            padding: 0 14px;
+            background: white;
+            font-weight: 700;
+            color: #17324d;
+        }
+
+        .update-btn {
+            height: 48px;
+            border: none;
+            border-radius: 10px;
+            padding: 0 24px;
+            background: #1769d5;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #1258b3;
+        }
+
+        .update-message {
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .update-message.success {
+            display: block;
+            color: #15803d;
+        }
+
+        .update-message.error {
+            display: block;
+            color: #dc2626;
+        }
 
         /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 850px) {
-
+        @media (max-width: 900px) {
             .stats {
-                grid-template-columns:
-                    repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
-
 
             .toolbar {
-                flex-direction: column;
-                align-items: stretch;
+                grid-template-columns: 1fr;
             }
 
-
-            .filter-box {
-                width: 100%;
+            main {
+                padding: 40px 18px;
             }
 
+            h1 {
+                font-size: 32px;
+            }
         }
 
-
-        @media (max-width: 550px) {
-
-            .container {
-                width: 94%;
+        @media (max-width: 600px) {
+            header {
+                padding: 0 18px;
             }
 
-
-            .stats {
-                grid-template-columns:
-                    1fr;
+            .brand {
+                font-size: 20px;
             }
-
-
-            .navbar {
-                padding: 0 4%;
-            }
-
 
             .admin-label {
-                display: none;
+                font-size: 11px;
             }
 
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .action-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- ================= HEADER ================= -->
 
-    <!-- ================= NAVBAR ================= -->
+    <header>
 
-    <header class="navbar">
-
-        <div class="logo">
-
-            <span class="logo-icon">
-                C
-            </span>
-
-            <span>
-                CivicConnect
-            </span>
-
+        <div class="brand">
+            <div class="brand-icon">C</div>
+            CivicConnect
         </div>
-
 
         <div class="admin-label">
             ADMIN DASHBOARD
@@ -485,24 +559,19 @@
 
     <!-- ================= MAIN ================= -->
 
-    <main class="container">
+    <main>
 
-
-        <div class="page-heading">
-
-            <span>
-                SMART GOVERNANCE
-            </span>
-
-            <h1>
-                Complaint Management
-            </h1>
-
-            <p>
-                View citizen complaints and update their status.
-            </p>
-
+        <div class="eyebrow">
+            SMART GOVERNANCE
         </div>
+
+        <h1>
+            Complaint Management
+        </h1>
+
+        <p class="subtitle">
+            Review citizen grievances, verify submitted information and manage resolution status.
+        </p>
 
 
         <!-- ================= STATS ================= -->
@@ -510,110 +579,81 @@
         <section class="stats">
 
             <div class="stat-card">
-
                 <div class="stat-title">
                     Total Complaints
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="totalCount"
-                >
+                <div class="stat-number" id="totalCount">
                     0
                 </div>
-
             </div>
 
 
-            <div class="stat-card">
-
+            <div class="stat-card pending">
                 <div class="stat-title">
-                    Pending
+                    Pending Review
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="pendingCount"
-                >
+                <div class="stat-number" id="pendingCount">
                     0
                 </div>
-
             </div>
 
 
-            <div class="stat-card">
-
+            <div class="stat-card progress">
                 <div class="stat-title">
                     In Progress
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="progressCount"
-                >
+                <div class="stat-number" id="progressCount">
                     0
                 </div>
-
             </div>
 
 
-            <div class="stat-card">
-
+            <div class="stat-card resolved">
                 <div class="stat-title">
                     Resolved
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="resolvedCount"
-                >
+                <div class="stat-number" id="resolvedCount">
                     0
                 </div>
-
             </div>
 
         </section>
 
 
-        <!-- ================= TOOLBAR ================= -->
+        <!-- ================= SEARCH ================= -->
 
         <section class="toolbar">
 
-            <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                class="search"
+                placeholder="Search complaint ID, citizen, district or issue..."
+            >
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search complaint ID, citizen, district or category..."
-                >
+            <select id="statusFilter" class="filter">
 
-            </div>
+                <option value="All">
+                    All Status
+                </option>
 
+                <option value="Pending">
+                    Pending
+                </option>
 
-            <div class="filter-box">
+                <option value="In Progress">
+                    In Progress
+                </option>
 
-                <select id="statusFilter">
+                <option value="Resolved">
+                    Resolved
+                </option>
 
-                    <option value="All">
-                        All Status
-                    </option>
-
-                    <option value="Pending">
-                        Pending
-                    </option>
-
-                    <option value="In Progress">
-                        In Progress
-                    </option>
-
-                    <option value="Resolved">
-                        Resolved
-                    </option>
-
-                </select>
-
-            </div>
-
+            </select>
 
             <button
                 class="refresh-btn"
@@ -646,7 +686,7 @@
                             </th>
 
                             <th>
-                                Category
+                                Issue
                             </th>
 
                             <th>
@@ -654,7 +694,7 @@
                             </th>
 
                             <th>
-                                Location
+                                Area
                             </th>
 
                             <th>
@@ -662,7 +702,7 @@
                             </th>
 
                             <th>
-                                Details
+                                Action
                             </th>
 
                         </tr>
@@ -692,20 +732,34 @@
     </main>
 
 
-    <!-- ================= MODAL ================= -->
+    <!-- ================= DETAILS MODAL ================= -->
 
     <div
         class="modal"
         id="detailModal"
+        onclick="closeModalOutside(event)"
     >
 
-        <div class="modal-card">
+        <div
+            class="modal-card"
+            onclick="event.stopPropagation()"
+        >
 
             <div class="modal-header">
 
-                <h2>
-                    Complaint Details
-                </h2>
+                <div>
+
+                    <h2>
+                        Complaint Details
+                    </h2>
+
+                    <div
+                        class="modal-id"
+                        id="modalComplaintId"
+                    >
+                    </div>
+
+                </div>
 
                 <button
                     class="close-btn"
@@ -718,7 +772,7 @@
 
 
             <div
-                class="detail-grid"
+                class="modal-body"
                 id="detailContent"
             >
             </div>
@@ -728,7 +782,13 @@
     </div>
 
 
+    <!-- ================= JAVASCRIPT ================= -->
+
     <script>
+
+        /* =====================================================
+           RAILWAY API
+        ===================================================== */
 
         const API_URL =
             "https://civicconnect-prototype-production.up.railway.app/api/complaints";
@@ -736,79 +796,67 @@
 
         let complaints = [];
 
+        let selectedComplaint = null;
 
-        // =====================================================
-        // LOAD COMPLAINTS
-        // =====================================================
+
+        /* =====================================================
+           LOAD COMPLAINTS
+        ===================================================== */
 
         async function loadComplaints() {
 
             const table =
-                document.getElementById(
-                    "complaintsTable"
-                );
+                document.getElementById("complaintsTable");
 
-            table.innerHTML =
-                `
-                    <tr>
-                        <td
-                            colspan="7"
-                            style="text-align:center;padding:40px;"
-                        >
-                            Loading complaints...
-                        </td>
-                    </tr>
-                `;
-
+            table.innerHTML = `
+                <tr>
+                    <td colspan="7"
+                        style="text-align:center;padding:45px;color:#647b94;">
+                        Loading complaints...
+                    </td>
+                </tr>
+            `;
 
             try {
 
                 const response =
                     await fetch(API_URL);
 
-
                 if (!response.ok) {
-
                     throw new Error(
-                        "Server error: " +
-                        response.status
+                        "Server returned " + response.status
                     );
                 }
 
-
                 complaints =
                     await response.json();
-
 
                 updateStats();
 
                 renderComplaints();
 
-
             } catch (error) {
 
                 console.error(error);
 
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="7"
+                            style="text-align:center;padding:45px;color:#dc2626;">
+                            Unable to load complaints.
+                            Please try Refresh again.
+                        </td>
+                    </tr>
+                `;
 
-                table.innerHTML =
-                    `
-                        <tr>
-                            <td
-                                colspan="7"
-                                style="text-align:center;padding:40px;color:#d33;"
-                            >
-                                Unable to load complaints.
-                                Make sure the Java server is running.
-                            </td>
-                        </tr>
-                    `;
             }
+
         }
 
 
-        // =====================================================
-        // UPDATE STATISTICS
-        // =====================================================
+        /* =====================================================
+           STATISTICS
+        ===================================================== */
 
         function updateStats() {
 
@@ -817,132 +865,101 @@
             let resolved = 0;
 
 
-            complaints.forEach(
-                function (complaint) {
+            complaints.forEach(function (complaint) {
 
-                    const status =
-                        complaint.status ||
-                        "Pending";
+                const status =
+                    complaint.status || "Pending";
 
 
-                    if (status === "Pending") {
+                if (status === "Pending") {
 
-                        pending++;
+                    pending++;
 
-                    } else if (
-                        status === "In Progress"
-                    ) {
+                } else if (status === "In Progress") {
 
-                        progress++;
+                    progress++;
 
-                    } else if (
-                        status === "Resolved"
-                    ) {
+                } else if (status === "Resolved") {
 
-                        resolved++;
-                    }
+                    resolved++;
+
                 }
-            );
+
+            });
 
 
-            document.getElementById(
-                "totalCount"
-            ).textContent =
-                complaints.length;
+            document.getElementById("totalCount")
+                .textContent = complaints.length;
 
+            document.getElementById("pendingCount")
+                .textContent = pending;
 
-            document.getElementById(
-                "pendingCount"
-            ).textContent =
-                pending;
+            document.getElementById("progressCount")
+                .textContent = progress;
 
+            document.getElementById("resolvedCount")
+                .textContent = resolved;
 
-            document.getElementById(
-                "progressCount"
-            ).textContent =
-                progress;
-
-
-            document.getElementById(
-                "resolvedCount"
-            ).textContent =
-                resolved;
         }
 
 
-        // =====================================================
-        // RENDER TABLE
-        // =====================================================
+        /* =====================================================
+           RENDER COMPLAINTS
+        ===================================================== */
 
         function renderComplaints() {
 
             const table =
-                document.getElementById(
-                    "complaintsTable"
-                );
-
+                document.getElementById("complaintsTable");
 
             const empty =
-                document.getElementById(
-                    "emptyMessage"
-                );
+                document.getElementById("emptyMessage");
 
 
             const search =
-                document.getElementById(
-                    "searchInput"
-                ).value
+                document.getElementById("searchInput")
+                    .value
                     .trim()
                     .toLowerCase();
 
 
             const filter =
-                document.getElementById(
-                    "statusFilter"
-                ).value;
+                document.getElementById("statusFilter")
+                    .value;
 
 
             const filtered =
-                complaints.filter(
-                    function (complaint) {
+                complaints.filter(function (complaint) {
 
-                        const status =
-                            complaint.status ||
-                            "Pending";
+                    const status =
+                        complaint.status || "Pending";
 
 
-                        const searchableText =
-                            (
-                                complaint.complaintId +
-                                " " +
-                                complaint.name +
-                                " " +
-                                complaint.district +
-                                " " +
-                                complaint.category
-                            )
-                                .toLowerCase();
+                    const searchableText = (
+
+                        (complaint.complaintId || "") + " " +
+                        (complaint.name || "") + " " +
+                        (complaint.district || "") + " " +
+                        (complaint.category || "") + " " +
+                        (complaint.location || "") + " " +
+                        (complaint.grievanceType || "") + " " +
+                        (complaint.petitionSubject || "")
+
+                    ).toLowerCase();
 
 
-                        const matchesSearch =
-                            searchableText.includes(
-                                search
-                            );
+                    const matchesSearch =
+                        searchableText.includes(search);
 
 
-                        const matchesFilter =
-                            filter === "All"
-                            ||
-                            status === filter;
+                    const matchesFilter =
+                        filter === "All" ||
+                        status === filter;
 
 
-                        return (
-                            matchesSearch
-                            &&
-                            matchesFilter
-                        );
-                    }
-                );
+                    return matchesSearch && matchesFilter;
+
+                });
 
 
             table.innerHTML = "";
@@ -950,211 +967,684 @@
 
             if (filtered.length === 0) {
 
-                empty.style.display =
-                    "block";
+                empty.style.display = "block";
 
                 return;
 
-            } else {
-
-                empty.style.display =
-                    "none";
             }
 
 
-            filtered.forEach(
-                function (complaint) {
+            empty.style.display = "none";
 
-                    const row =
-                        document.createElement(
-                            "tr"
+
+            filtered.forEach(function (complaint) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                const status =
+                    complaint.status || "Pending";
+
+
+                let statusClass = "pending";
+
+                if (status === "In Progress") {
+                    statusClass = "progress";
+                }
+
+                if (status === "Resolved") {
+                    statusClass = "resolved";
+                }
+
+
+                const issue =
+                    complaint.grievanceType === "Grievance Petition"
+                        ? (
+                            complaint.petitionSubject ||
+                            complaint.category ||
+                            "Grievance Petition"
+                        )
+                        : (
+                            complaint.category ||
+                            "Civic Grievance"
                         );
 
 
-                    const status =
-                        complaint.status ||
-                        "Pending";
+                const area =
+                    complaint.areaType
+                        ? complaint.areaType
+                        : "—";
 
 
-                    row.innerHTML =
-                        `
-                            <td>
-                                <span class="complaint-id">
-                                    ${escapeHtml(
-                                        complaint.complaintId
-                                    )}
-                                </span>
-                            </td>
+                row.innerHTML = `
 
-                            <td>
-                                <span class="citizen-name">
-                                    ${escapeHtml(
-                                        complaint.name
-                                    )}
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="category">
-                                    ${escapeHtml(
-                                        complaint.category
-                                    )}
-                                </span>
-                            </td>
-
-                            <td>
-                                ${escapeHtml(
-                                    complaint.district
-                                )}
-                            </td>
-
-                            <td>
-                                ${escapeHtml(
-                                    complaint.location
-                                )}
-                            </td>
-
-                            <td>
-
-                                <select
-                                    class="status-select"
-                                    onchange="changeStatus(
-                                        ${complaint.id},
-                                        this.value
-                                    )"
-                                >
-
-                                    <option
-                                        value="Pending"
-                                        ${status === "Pending"
-                                            ? "selected"
-                                            : ""}
-                                    >
-                                        Pending
-                                    </option>
-
-                                    <option
-                                        value="In Progress"
-                                        ${status === "In Progress"
-                                            ? "selected"
-                                            : ""}
-                                    >
-                                        In Progress
-                                    </option>
-
-                                    <option
-                                        value="Resolved"
-                                        ${status === "Resolved"
-                                            ? "selected"
-                                            : ""}
-                                    >
-                                        Resolved
-                                    </option>
-
-                                </select>
-
-                            </td>
-
-                            <td>
-
-                                <button
-                                    class="view-btn"
-                                    onclick="showDetails(
-                                        ${complaint.id}
-                                    )"
-                                >
-                                    View
-                                </button>
-
-                            </td>
-                        `;
+                    <td>
+                        <div class="complaint-id">
+                            ${escapeHtml(
+                                complaint.complaintId || "—"
+                            )}
+                        </div>
+                    </td>
 
 
-                    table.appendChild(
-                        row
-                    );
-                }
-            );
+                    <td>
+                        <div class="citizen-name">
+                            ${escapeHtml(
+                                complaint.name || "—"
+                            )}
+                        </div>
+                    </td>
+
+
+                    <td>
+                        <div class="issue-title">
+                            ${escapeHtml(issue)}
+                        </div>
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            complaint.district || "—"
+                        )}
+                    </td>
+
+
+                    <td>
+                        <div class="area-text">
+                            ${escapeHtml(area)}
+                        </div>
+                    </td>
+
+
+                    <td>
+
+                        <select
+                            class="status-select ${statusClass}"
+                            onchange="quickUpdateStatus(
+                                ${complaint.id},
+                                this.value
+                            )"
+                        >
+
+                            <option
+                                value="Pending"
+                                ${status === "Pending" ? "selected" : ""}
+                            >
+                                Pending
+                            </option>
+
+                            <option
+                                value="In Progress"
+                                ${status === "In Progress" ? "selected" : ""}
+                            >
+                                In Progress
+                            </option>
+
+                            <option
+                                value="Resolved"
+                                ${status === "Resolved" ? "selected" : ""}
+                            >
+                                Resolved
+                            </option>
+
+                        </select>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="view-btn"
+                            onclick="viewComplaint(${complaint.id})"
+                        >
+                            View
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            });
+
         }
 
 
-        // =====================================================
-        // CHANGE STATUS
-        // =====================================================
+        /* =====================================================
+           VIEW COMPLAINT
+        ===================================================== */
 
-        async function changeStatus(
-            id,
+        function viewComplaint(databaseId) {
+
+            selectedComplaint =
+                complaints.find(function (complaint) {
+
+                    return Number(complaint.id) ===
+                        Number(databaseId);
+
+                });
+
+
+            if (!selectedComplaint) {
+                return;
+            }
+
+
+            const complaint =
+                selectedComplaint;
+
+
+            document.getElementById(
+                "modalComplaintId"
+            ).textContent =
+                complaint.complaintId || "Complaint";
+
+
+            const areaType =
+                complaint.areaType || "";
+
+
+            let areaDetails = "";
+
+
+            if (
+                areaType.toLowerCase() === "rural"
+            ) {
+
+                areaDetails = `
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Area Type
+                        </div>
+                        <div class="detail-value">
+                            Rural
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Block
+                        </div>
+                        <div class="detail-value">
+                            ${displayValue(complaint.blockName)}
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Panchayat
+                        </div>
+                        <div class="detail-value">
+                            ${displayValue(complaint.panchayat)}
+                        </div>
+                    </div>
+
+                `;
+
+            } else if (
+                areaType.toLowerCase() === "urban"
+            ) {
+
+                areaDetails = `
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Area Type
+                        </div>
+                        <div class="detail-value">
+                            Urban
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Municipality
+                        </div>
+                        <div class="detail-value">
+                            ${displayValue(complaint.municipality)}
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Ward Number
+                        </div>
+                        <div class="detail-value">
+                            ${displayValue(complaint.wardNumber)}
+                        </div>
+                    </div>
+
+                `;
+
+            } else {
+
+                areaDetails = `
+
+                    <div class="detail-item">
+                        <div class="detail-label">
+                            Area Type
+                        </div>
+                        <div class="detail-value">
+                            Not specified
+                        </div>
+                    </div>
+
+                `;
+
+            }
+
+
+            const grievanceType =
+                complaint.grievanceType ||
+                "Civic Grievance";
+
+
+            const issueLabel =
+                grievanceType === "Grievance Petition"
+                    ? "Petition Subject"
+                    : "Civic Category";
+
+
+            const issueValue =
+                grievanceType === "Grievance Petition"
+                    ? (
+                        complaint.petitionSubject ||
+                        complaint.category
+                    )
+                    : complaint.category;
+
+
+            document.getElementById(
+                "detailContent"
+            ).innerHTML = `
+
+
+                <!-- CITIZEN -->
+
+                <section class="detail-section">
+
+                    <div class="section-title">
+                        Citizen Information
+                    </div>
+
+
+                    <div class="detail-grid">
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Citizen Name
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    complaint.name
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Phone Number
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    complaint.phone
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- LOCATION -->
+
+                <section class="detail-section">
+
+                    <div class="section-title">
+                        Location Details
+                    </div>
+
+
+                    <div class="detail-grid">
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                District
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    complaint.district
+                                )}
+                            </div>
+
+                        </div>
+
+                        ${areaDetails}
+
+
+                        <div class="detail-item full-width">
+
+                            <div class="detail-label">
+                                Exact Location
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    complaint.location
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- GRIEVANCE -->
+
+                <section class="detail-section">
+
+                    <div class="section-title">
+                        Grievance Details
+                    </div>
+
+
+                    <div class="detail-grid">
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Grievance Type
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    grievanceType
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                ${issueLabel}
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    issueValue
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item full-width">
+
+                            <div class="detail-label">
+                                Problem Description
+                            </div>
+
+                            <div class="description-box">
+                                ${escapeHtml(
+                                    complaint.description ||
+                                    "No description provided."
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SUBMISSION -->
+
+                <section class="detail-section">
+
+                    <div class="section-title">
+                        Submission Information
+                    </div>
+
+
+                    <div class="detail-grid">
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Complaint ID
+                            </div>
+
+                            <div class="detail-value">
+                                ${displayValue(
+                                    complaint.complaintId
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Submitted On
+                            </div>
+
+                            <div class="detail-value">
+                                ${formatDate(
+                                    complaint.createdAt
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ADMIN ACTION -->
+
+                <section class="detail-section">
+
+                    <div class="section-title">
+                        Admin Action
+                    </div>
+
+
+                    <div class="action-box">
+
+                        <div class="action-row">
+
+                            <select
+                                id="modalStatus"
+                                class="modal-status"
+                            >
+
+                                <option
+                                    value="Pending"
+                                    ${complaint.status === "Pending" ? "selected" : ""}
+                                >
+                                    Pending
+                                </option>
+
+                                <option
+                                    value="In Progress"
+                                    ${complaint.status === "In Progress" ? "selected" : ""}
+                                >
+                                    In Progress
+                                </option>
+
+                                <option
+                                    value="Resolved"
+                                    ${complaint.status === "Resolved" ? "selected" : ""}
+                                >
+                                    Resolved
+                                </option>
+
+                            </select>
+
+
+                            <button
+                                class="update-btn"
+                                onclick="updateModalStatus()"
+                            >
+                                Update Status
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="updateMessage"
+                            class="update-message"
+                        >
+                        </div>
+
+                    </div>
+
+                </section>
+
+            `;
+
+
+            document.getElementById(
+                "detailModal"
+            ).classList.add("show");
+
+        }
+
+
+        /* =====================================================
+           UPDATE STATUS FROM MODAL
+        ===================================================== */
+
+        async function updateModalStatus() {
+
+            if (!selectedComplaint) {
+                return;
+            }
+
+
+            const status =
+                document.getElementById(
+                    "modalStatus"
+                ).value;
+
+
+            const message =
+                document.getElementById(
+                    "updateMessage"
+                );
+
+
+            message.className =
+                "update-message";
+
+
+            message.textContent =
+                "Updating status...";
+
+
+            message.classList.add(
+                "success"
+            );
+
+
+            try {
+
+                await sendStatusUpdate(
+                    selectedComplaint.id,
+                    status
+                );
+
+
+                selectedComplaint.status =
+                    status;
+
+
+                updateStats();
+
+                renderComplaints();
+
+
+                message.textContent =
+                    "Status updated successfully.";
+
+                message.className =
+                    "update-message success";
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Unable to update status. Please try again.";
+
+                message.className =
+                    "update-message error";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           QUICK STATUS UPDATE
+        ===================================================== */
+
+        async function quickUpdateStatus(
+            databaseId,
             status
         ) {
 
             try {
 
-                const body =
-                    "status=" +
-                    encodeURIComponent(
-                        status
-                    );
+                await sendStatusUpdate(
+                    databaseId,
+                    status
+                );
 
 
-                const response =
-                    await fetch(
-                        API_URL +
-                        "/" +
-                        id +
-                        "/status",
-                        {
-                            method: "PUT",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/x-www-form-urlencoded"
-                            },
-
-                            body: body
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.message ||
-                        "Status update failed"
-                    );
-                }
-
-
-                // Update local data
                 const complaint =
-                    complaints.find(
-                        function (item) {
-                            return Number(item.id)
-                                === Number(id);
-                        }
-                    );
+                    complaints.find(function (item) {
+
+                        return Number(item.id) ===
+                            Number(databaseId);
+
+                    });
 
 
                 if (complaint) {
 
                     complaint.status =
                         status;
+
                 }
 
 
                 updateStats();
-
-
-                alert(
-                    "Complaint " +
-                    complaint.complaintId +
-                    " updated to " +
-                    status
-                );
-
 
                 renderComplaints();
 
@@ -1164,229 +1654,173 @@
                 console.error(error);
 
                 alert(
-                    "Unable to update complaint status.\n\n" +
-                    error.message
+                    "Unable to update status. Please try again."
                 );
 
+                renderComplaints();
 
-                loadComplaints();
             }
+
         }
 
 
-        // =====================================================
-        // SHOW DETAILS
-        // =====================================================
+        /* =====================================================
+           SEND STATUS UPDATE
+        ===================================================== */
 
-        function showDetails(id) {
+        async function sendStatusUpdate(
+            databaseId,
+            status
+        ) {
 
-            const complaint =
-                complaints.find(
-                    function (item) {
+            const response =
+                await fetch(
+                    API_URL + "/" +
+                    databaseId +
+                    "/status",
+                    {
 
-                        return Number(item.id)
-                            === Number(id);
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+                        },
+
+                        body:
+                            new URLSearchParams({
+                                status: status
+                            })
+
                     }
                 );
 
 
-            if (!complaint) {
+            if (!response.ok) {
 
-                return;
+                const text =
+                    await response.text();
+
+                throw new Error(
+                    text ||
+                    "Status update failed"
+                );
+
             }
 
 
-            const detailContent =
-                document.getElementById(
-                    "detailContent"
-                );
+            return response.json();
 
-
-            detailContent.innerHTML =
-                `
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            Complaint ID
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.complaintId
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            Status
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.status ||
-                                "Pending"
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            Citizen Name
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.name
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            Phone
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.phone
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            District
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.district
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            Location
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.location
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail full">
-
-                        <div class="detail-label">
-                            Category
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.category
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail full">
-
-                        <div class="detail-label">
-                            Description
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.description
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail full">
-
-                        <div class="detail-label">
-                            Submitted At
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHtml(
-                                complaint.createdAt
-                            )}
-                        </div>
-
-                    </div>
-                `;
-
-
-            document.getElementById(
-                "detailModal"
-            ).classList.add(
-                "show"
-            );
         }
 
 
-        // =====================================================
-        // CLOSE MODAL
-        // =====================================================
+        /* =====================================================
+           CLOSE MODAL
+        ===================================================== */
 
         function closeModal() {
 
             document.getElementById(
                 "detailModal"
-            ).classList.remove(
-                "show"
-            );
+            ).classList.remove("show");
+
+            selectedComplaint =
+                null;
+
         }
 
 
-        // =====================================================
-        // CLOSE MODAL WHEN CLICKING OUTSIDE
-        // =====================================================
+        function closeModalOutside(event) {
 
-        document.getElementById(
-            "detailModal"
-        ).addEventListener(
-            "click",
-            function (event) {
+            if (
+                event.target.id ===
+                "detailModal"
+            ) {
 
-                if (
-                    event.target ===
-                    this
-                ) {
+                closeModal();
 
-                    closeModal();
-                }
             }
-        );
+
+        }
 
 
-        // =====================================================
-        // SEARCH
-        // =====================================================
+        /* =====================================================
+           HELPERS
+        ===================================================== */
+
+        function displayValue(value) {
+
+            if (
+                value === null ||
+                value === undefined ||
+                String(value).trim() === ""
+            ) {
+
+                return "Not provided";
+
+            }
+
+
+            return escapeHtml(
+                String(value)
+            );
+
+        }
+
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        function formatDate(value) {
+
+            if (!value) {
+                return "Not available";
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return escapeHtml(
+                    String(value)
+                );
+
+            }
+
+
+            return date.toLocaleString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           SEARCH + FILTER
+        ===================================================== */
 
         document.getElementById(
             "searchInput"
@@ -1396,10 +1830,6 @@
         );
 
 
-        // =====================================================
-        // FILTER
-        // =====================================================
-
         document.getElementById(
             "statusFilter"
         ).addEventListener(
@@ -1408,48 +1838,29 @@
         );
 
 
-        // =====================================================
-        // ESCAPE HTML
-        // =====================================================
+        /* =====================================================
+           ESCAPE KEY
+        ===================================================== */
 
-        function escapeHtml(value) {
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-            if (
-                value === null ||
-                value === undefined
-            ) {
+                if (
+                    event.key === "Escape"
+                ) {
 
-                return "";
+                    closeModal();
+
+                }
+
             }
+        );
 
 
-            return String(value)
-                .replace(
-                    /&/g,
-                    "&amp;"
-                )
-                .replace(
-                    /</g,
-                    "&lt;"
-                )
-                .replace(
-                    />/g,
-                    "&gt;"
-                )
-                .replace(
-                    /"/g,
-                    "&quot;"
-                )
-                .replace(
-                    /'/g,
-                    "&#039;"
-                );
-        }
-
-
-        // =====================================================
-        // START
-        // =====================================================
+        /* =====================================================
+           START
+        ===================================================== */
 
         loadComplaints();
 

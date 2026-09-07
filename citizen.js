@@ -10,27 +10,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const loginForm =
-        document.getElementById("loginForm");
-
-    const signupForm =
-        document.getElementById("signupForm");
-
-
-    if (loginForm) {
-        loginForm.addEventListener(
-            "submit",
-            handleLogin
-        );
-    }
-
-
-    if (signupForm) {
-        signupForm.addEventListener(
-            "submit",
-            handleSignup
-        );
-    }
+    // Make sure the correct form is visible when page loads
+    showLogin();
 
 });
 
@@ -54,25 +35,42 @@ function showLogin() {
         document.getElementById("signupTab");
 
     const title =
-        document.getElementById("authTitle");
+        document.getElementById("formTitle");
 
     const subtitle =
-        document.getElementById("authSubtitle");
+        document.getElementById("formSubtitle");
 
 
-    loginForm.classList.remove("hidden");
+    // Show login form
+    if (loginForm) {
+        loginForm.classList.remove("hidden");
+    }
 
-    signupForm.classList.add("hidden");
+    // Hide signup form
+    if (signupForm) {
+        signupForm.classList.remove("active");
+    }
 
-    loginTab.classList.add("active");
+    // Update tabs
+    if (loginTab) {
+        loginTab.classList.add("active");
+    }
 
-    signupTab.classList.remove("active");
+    if (signupTab) {
+        signupTab.classList.remove("active");
+    }
 
-    title.textContent =
-        "Welcome back";
 
-    subtitle.textContent =
-        "Sign in to your CivicConnect account.";
+    // Update heading
+    if (title) {
+        title.textContent = "Welcome back";
+    }
+
+    if (subtitle) {
+        subtitle.textContent =
+            "Sign in to your CivicConnect account.";
+    }
+
 
     hideMessages();
 }
@@ -97,25 +95,43 @@ function showSignup() {
         document.getElementById("signupTab");
 
     const title =
-        document.getElementById("authTitle");
+        document.getElementById("formTitle");
 
     const subtitle =
-        document.getElementById("authSubtitle");
+        document.getElementById("formSubtitle");
 
 
-    loginForm.classList.add("hidden");
+    // Hide login form
+    if (loginForm) {
+        loginForm.classList.add("hidden");
+    }
 
-    signupForm.classList.remove("hidden");
+    // Show signup form
+    if (signupForm) {
+        signupForm.classList.add("active");
+    }
 
-    loginTab.classList.remove("active");
+    // Update tabs
+    if (loginTab) {
+        loginTab.classList.remove("active");
+    }
 
-    signupTab.classList.add("active");
+    if (signupTab) {
+        signupTab.classList.add("active");
+    }
 
-    title.textContent =
-        "Create your citizen account";
 
-    subtitle.textContent =
-        "Set up your CivicConnect profile once.";
+    // Update heading
+    if (title) {
+        title.textContent =
+            "Create your citizen account";
+    }
+
+    if (subtitle) {
+        subtitle.textContent =
+            "Set up your CivicConnect profile once.";
+    }
+
 
     hideMessages();
 }
@@ -132,28 +148,45 @@ function handleSignup(event) {
     hideMessages();
 
 
+    const nameElement =
+        document.getElementById("signupName");
+
+    const phoneElement =
+        document.getElementById("signupPhone");
+
+    const passwordElement =
+        document.getElementById("signupPassword");
+
+
+    if (!nameElement ||
+        !phoneElement ||
+        !passwordElement) {
+
+        showSignupError(
+            "Signup form could not be loaded. Please refresh the page."
+        );
+
+        return;
+    }
+
+
     const name =
-        document.getElementById("signupName")
-            .value.trim();
+        nameElement.value.trim();
 
     const phone =
-        document.getElementById("signupPhone")
-            .value.trim();
+        phoneElement.value.trim();
 
     const password =
-        document.getElementById("signupPassword")
-            .value;
-
-    const confirmPassword =
-        document.getElementById("confirmPassword")
-            .value;
+        passwordElement.value;
 
 
-    /* NAME */
+    /* =====================================================
+       NAME VALIDATION
+       ===================================================== */
 
     if (name.length < 3) {
 
-        showError(
+        showSignupError(
             "Please enter your full name."
         );
 
@@ -161,11 +194,13 @@ function handleSignup(event) {
     }
 
 
-    /* PHONE */
+    /* =====================================================
+       PHONE VALIDATION
+       ===================================================== */
 
     if (!/^[0-9]{10}$/.test(phone)) {
 
-        showError(
+        showSignupError(
             "Please enter a valid 10-digit mobile number."
         );
 
@@ -173,11 +208,13 @@ function handleSignup(event) {
     }
 
 
-    /* PASSWORD */
+    /* =====================================================
+       PASSWORD VALIDATION
+       ===================================================== */
 
     if (password.length < 6) {
 
-        showError(
+        showSignupError(
             "Password must contain at least 6 characters."
         );
 
@@ -185,19 +222,9 @@ function handleSignup(event) {
     }
 
 
-    /* CONFIRM PASSWORD */
-
-    if (password !== confirmPassword) {
-
-        showError(
-            "Passwords do not match."
-        );
-
-        return;
-    }
-
-
-    /* CHECK EXISTING ACCOUNT */
+    /* =====================================================
+       CHECK EXISTING ACCOUNT
+       ===================================================== */
 
     const oldAccount =
         localStorage.getItem(
@@ -215,15 +242,17 @@ function handleSignup(event) {
 
             if (existing.phone === phone) {
 
-                showError(
+                showSignupError(
                     "An account already exists with this mobile number."
                 );
 
                 return;
             }
 
+
         } catch (error) {
 
+            // Remove damaged account data
             localStorage.removeItem(
                 "civicconnectCitizen"
             );
@@ -233,16 +262,21 @@ function handleSignup(event) {
     }
 
 
-    /* CREATE CITIZEN ID */
+    /* =====================================================
+       CREATE CITIZEN ID
+       ===================================================== */
 
     const citizenId =
         "CIT" +
         Math.floor(
-            100000 + Math.random() * 900000
+            100000 +
+            Math.random() * 900000
         );
 
 
-    /* CREATE ACCOUNT */
+    /* =====================================================
+       CREATE CITIZEN ACCOUNT
+       ===================================================== */
 
     const citizen = {
 
@@ -262,7 +296,9 @@ function handleSignup(event) {
     };
 
 
-    /* SAVE ACCOUNT */
+    /* =====================================================
+       SAVE ACCOUNT
+       ===================================================== */
 
     localStorage.setItem(
         "civicconnectCitizen",
@@ -270,28 +306,48 @@ function handleSignup(event) {
     );
 
 
-    /* SUCCESS */
+    /* =====================================================
+       SUCCESS MESSAGE
+       ===================================================== */
 
-    showSuccess(
-        "Account created successfully. Citizen ID: " +
+    showSignupSuccess(
+        "Account created successfully. Your Citizen ID is " +
         citizenId
     );
 
 
-    document.getElementById(
-        "signupForm"
-    ).reset();
+    /* =====================================================
+       RESET SIGNUP FORM
+       ===================================================== */
+
+    const signupForm =
+        document.getElementById("signupForm");
+
+    if (signupForm) {
+        signupForm.reset();
+    }
 
 
-    /* MOVE TO LOGIN */
+    /* =====================================================
+       MOVE TO LOGIN
+       ===================================================== */
 
     setTimeout(function () {
 
         showLogin();
 
-        document.getElementById(
-            "loginPhone"
-        ).value = phone;
+
+        const loginPhone =
+            document.getElementById("loginPhone");
+
+
+        if (loginPhone) {
+
+            loginPhone.value =
+                phone;
+
+        }
+
 
     }, 1500);
 
@@ -309,18 +365,38 @@ function handleLogin(event) {
     hideMessages();
 
 
+    const phoneElement =
+        document.getElementById("loginPhone");
+
+    const passwordElement =
+        document.getElementById("loginPassword");
+
+
+    if (!phoneElement ||
+        !passwordElement) {
+
+        showLoginError(
+            "Login form could not be loaded. Please refresh the page."
+        );
+
+        return;
+    }
+
+
     const phone =
-        document.getElementById("loginPhone")
-            .value.trim();
+        phoneElement.value.trim();
 
     const password =
-        document.getElementById("loginPassword")
-            .value;
+        passwordElement.value;
 
+
+    /* =====================================================
+       PHONE VALIDATION
+       ===================================================== */
 
     if (!/^[0-9]{10}$/.test(phone)) {
 
-        showError(
+        showLoginError(
             "Please enter a valid 10-digit mobile number."
         );
 
@@ -328,9 +404,13 @@ function handleLogin(event) {
     }
 
 
+    /* =====================================================
+       PASSWORD VALIDATION
+       ===================================================== */
+
     if (password.length === 0) {
 
-        showError(
+        showLoginError(
             "Please enter your password."
         );
 
@@ -338,7 +418,9 @@ function handleLogin(event) {
     }
 
 
-    /* GET ACCOUNT */
+    /* =====================================================
+       GET ACCOUNT
+       ===================================================== */
 
     const account =
         localStorage.getItem(
@@ -348,7 +430,7 @@ function handleLogin(event) {
 
     if (!account) {
 
-        showError(
+        showLoginError(
             "No account found. Please create your citizen account first."
         );
 
@@ -366,19 +448,21 @@ function handleLogin(event) {
 
     } catch (error) {
 
-        showError(
-            "Account data could not be read."
+        showLoginError(
+            "Account data could not be read. Please create your account again."
         );
 
         return;
     }
 
 
-    /* CHECK PHONE */
+    /* =====================================================
+       CHECK PHONE
+       ===================================================== */
 
     if (citizen.phone !== phone) {
 
-        showError(
+        showLoginError(
             "Mobile number or password is incorrect."
         );
 
@@ -386,11 +470,13 @@ function handleLogin(event) {
     }
 
 
-    /* CHECK PASSWORD */
+    /* =====================================================
+       CHECK PASSWORD
+       ===================================================== */
 
     if (citizen.password !== password) {
 
-        showError(
+        showLoginError(
             "Mobile number or password is incorrect."
         );
 
@@ -398,17 +484,21 @@ function handleLogin(event) {
     }
 
 
-    /* LOGIN SUCCESS */
+    /* =====================================================
+       LOGIN SUCCESS
+       ===================================================== */
 
     sessionStorage.setItem(
         "civicconnectLoggedIn",
         "true"
     );
 
+
     sessionStorage.setItem(
         "civicconnectCitizenId",
         citizen.citizenId
     );
+
 
     sessionStorage.setItem(
         "civicconnectCitizenName",
@@ -416,10 +506,18 @@ function handleLogin(event) {
     );
 
 
-    showSuccess(
+    /* =====================================================
+       SUCCESS MESSAGE
+       ===================================================== */
+
+    showLoginSuccess(
         "Login successful. Opening your profile..."
     );
 
+
+    /* =====================================================
+       OPEN CITIZEN PROFILE
+       ===================================================== */
 
     setTimeout(function () {
 
@@ -432,7 +530,7 @@ function handleLogin(event) {
 
 
 /* =========================================================
-   SHOW / HIDE PASSWORD
+   PASSWORD VISIBILITY
    ========================================================= */
 
 function togglePassword(
@@ -444,17 +542,36 @@ function togglePassword(
         document.getElementById(inputId);
 
 
+    if (!input) {
+        return;
+    }
+
+
     if (input.type === "password") {
 
         input.type = "text";
 
-        button.textContent = "Hide";
+        if (button) {
+
+            button.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }
 
     } else {
 
         input.type = "password";
 
-        button.textContent = "Show";
+        if (button) {
+
+            button.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
 
     }
 
@@ -467,9 +584,12 @@ function togglePassword(
 
 function forgotPassword(event) {
 
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
 
-    showError(
+
+    showLoginError(
         "Password recovery will be connected to the backend later."
     );
 
@@ -477,108 +597,149 @@ function forgotPassword(event) {
 
 
 /* =========================================================
-   ERROR MESSAGE
+   LOGIN ERROR
    ========================================================= */
 
-function showError(message) {
+function showLoginError(message) {
 
-    const error =
+    const messageBox =
         document.getElementById(
-            "errorMessage"
-        );
-
-    const success =
-        document.getElementById(
-            "successMessage"
+            "loginMessage"
         );
 
 
-    if (success) {
-        success.style.display = "none";
+    if (!messageBox) {
+        return;
     }
 
 
-    if (error) {
+    messageBox.textContent =
+        message;
 
-        error.textContent =
-            message;
 
-        error.style.display =
-            "block";
+    messageBox.className =
+        "message error show";
 
-    }
 
 }
 
 
 /* =========================================================
-   SUCCESS MESSAGE
+   LOGIN SUCCESS
    ========================================================= */
 
-function showSuccess(message) {
+function showLoginSuccess(message) {
 
-    const error =
+    const messageBox =
         document.getElementById(
-            "errorMessage"
-        );
-
-    const success =
-        document.getElementById(
-            "successMessage"
+            "loginMessage"
         );
 
 
-    if (error) {
-        error.style.display = "none";
+    if (!messageBox) {
+        return;
     }
 
 
-    if (success) {
+    messageBox.textContent =
+        message;
 
-        success.textContent =
-            message;
 
-        success.style.display =
-            "block";
-
-    }
+    messageBox.className =
+        "message success show";
 
 }
 
 
 /* =========================================================
-   HIDE MESSAGES
+   SIGNUP ERROR
+   ========================================================= */
+
+function showSignupError(message) {
+
+    const messageBox =
+        document.getElementById(
+            "signupMessage"
+        );
+
+
+    if (!messageBox) {
+        return;
+    }
+
+
+    messageBox.textContent =
+        message;
+
+
+    messageBox.className =
+        "message error show";
+
+}
+
+
+/* =========================================================
+   SIGNUP SUCCESS
+   ========================================================= */
+
+function showSignupSuccess(message) {
+
+    const messageBox =
+        document.getElementById(
+            "signupMessage"
+        );
+
+
+    if (!messageBox) {
+        return;
+    }
+
+
+    messageBox.textContent =
+        message;
+
+
+    messageBox.className =
+        "message success show";
+
+}
+
+
+/* =========================================================
+   HIDE ALL MESSAGES
    ========================================================= */
 
 function hideMessages() {
 
-    const error =
+    const loginMessage =
         document.getElementById(
-            "errorMessage"
+            "loginMessage"
         );
 
-    const success =
+    const signupMessage =
         document.getElementById(
-            "successMessage"
+            "signupMessage"
         );
 
 
-    if (error) {
+    if (loginMessage) {
 
-        error.textContent = "";
+        loginMessage.textContent =
+            "";
 
-        error.style.display =
-            "none";
+        loginMessage.className =
+            "message";
 
     }
 
 
-    if (success) {
+    if (signupMessage) {
 
-        success.textContent = "";
+        signupMessage.textContent =
+            "";
 
-        success.style.display =
-            "none";
+        signupMessage.className =
+            "message";
 
     }
 

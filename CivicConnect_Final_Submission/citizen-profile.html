@@ -2,963 +2,920 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CivicConnect | Citizen Profile</title>
+    <title>CivicConnect - Citizen Login</title>
 
-
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
+        rel="stylesheet">
 
     <style>
-
-        :root {
-            --blue: #216FE8;
-            --blue-dark: #185FCB;
-            --navy: #17233C;
-            --text: #42526B;
-            --muted: #718096;
-            --background: #F4F8FD;
-            --white: #FFFFFF;
-            --border: #D8E3F0;
-            --soft-blue: #E8F1FF;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+            background: #eef3f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            color: #092b55;
+        }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
+        /* ================= MAIN CONTAINER ================= */
+
+        .login-container {
+            width: 100%;
+            max-width: 1330px;
+            min-height: 760px;
+            background: white;
+            border-radius: 38px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            box-shadow: 0 25px 70px rgba(20, 65, 110, 0.15);
+        }
+
+        /* ================= LEFT PANEL ================= */
+
+        .left-panel {
+            position: relative;
+            padding: 62px;
+            color: white;
+            overflow: hidden;
+
+            background: linear-gradient(
+                135deg,
+                #0f4c81 0%,
+                #1677c8 48%,
+                #2563eb 100%
+            );
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-panel::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 50%;
+            top: -140px;
+            right: -110px;
+        }
+
+        .left-panel::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            bottom: -180px;
+            left: -130px;
+        }
+
+        /* ================= LOGO ================= */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: white;
+            color: #0878c9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .logo-name {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        /* ================= LEFT CONTENT ================= */
+
+        .left-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 145px;
+            max-width: 570px;
+        }
+
+        .portal-badge {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 30px;
+            padding: 10px 19px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 34px;
+        }
+
+        .left-content h1 {
+            font-size: 58px;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+        }
+
+        .left-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.92);
+            max-width: 520px;
+        }
+
+        /* ================= LEFT FOOTER ================= */
+
+        .left-footer {
+            position: absolute;
+            z-index: 3;
+            bottom: 62px;
+            left: 62px;
+            right: 62px;
+
+            display: flex;
+            align-items: center;
+            gap: 17px;
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .check-box {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        /* ================= RIGHT PANEL ================= */
+
+        .right-panel {
+            padding: 66px 78px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-panel h2 {
+            font-size: 38px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #58708c;
+            font-size: 16px;
+            margin-bottom: 34px;
+        }
+
+        /* ================= TABS ================= */
+
+        .tabs {
+            width: 100%;
+            background: #edf2f7;
+            padding: 6px;
+            border-radius: 16px;
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            width: 50%;
+            border: none;
+            background: transparent;
+            padding: 16px 10px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            color: #46617d;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #0878c9;
+            box-shadow: 0 4px 12px rgba(30, 70, 110, 0.10);
+        }
+
+        /* ================= MESSAGES ================= */
+
+        .message {
+            display: none;
+            padding: 13px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #e8f7f0;
+            color: #087a50;
+        }
+
+        .message.error {
+            background: #fff0f0;
+            color: #c0392b;
+        }
+
+        /* ================= FORMS ================= */
+
+        form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #082b55;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 56px;
+            border: 1px solid #cfdae7;
+            border-radius: 14px;
+            padding: 0 17px;
+            outline: none;
+            font-family: inherit;
+            font-size: 15px;
+            color: #173653;
+            background: white;
+            transition: 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #2679df;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+
+        /* ================= PASSWORD ================= */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 55px;
+        }
+
+        .eye-button {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 36px;
+            height: 36px;
+
+            border: none;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+            color: #0878c9;
             padding: 0;
         }
 
-
-        body {
-
-            font-family: "Inter", sans-serif;
-
-            background: var(--background);
-
-            color: var(--navy);
-
-            min-height: 100vh;
+        .eye-button:hover {
+            color: #1d4ed8;
         }
 
-
-        /* =========================
-           NAVBAR
-        ========================== */
-
-        .navbar {
-
-            height: 74px;
-
-            background: white;
-
-            border-bottom: 1px solid #E4EBF3;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            padding: 0 7%;
+        .eye-button svg {
+            width: 21px;
+            height: 21px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
+        /* ================= FORGOT PASSWORD ================= */
 
-        .logo {
+        .forgot {
+            display: block;
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 26px;
 
-            display: flex;
-
-            align-items: center;
-
-            gap: 11px;
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            color: var(--navy);
+            color: #0785a4;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
         }
 
+        .forgot:hover {
+            text-decoration: underline;
+        }
 
-        .logo-icon {
+        /* ================= PRIMARY BUTTON ================= */
 
-            width: 40px;
+        .primary-button {
+            width: 100%;
+            height: 58px;
+            border: none;
+            border-radius: 14px;
 
-            height: 40px;
-
-            border-radius: 11px;
-
-            background: var(--blue);
-
+            background: #2563eb;
             color: white;
 
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 20px;
-
-            font-weight: 800;
-        }
-
-
-        .logout {
-
-            border: 1px solid #D9E6F7;
-
-            background: white;
-
-            color: var(--blue);
-
-            padding: 10px 17px;
-
-            border-radius: 9px;
-
             font-family: inherit;
-
-            font-size: 11px;
-
+            font-size: 15px;
             font-weight: 700;
 
             cursor: pointer;
 
-            transition: 0.2s;
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+
+            transition: 0.2s ease;
         }
 
-
-        .logout:hover {
-
-            background: var(--soft-blue);
-
-            border-color: #C8DCF7;
-        }
-
-
-        /* =========================
-           PAGE
-        ========================== */
-
-        .container {
-
-            width: 100%;
-
-            max-width: 950px;
-
-            margin: 55px auto;
-
-            padding: 0 22px;
-        }
-
-
-        /* =========================
-           WELCOME
-        ========================== */
-
-        .welcome {
-
-            margin-bottom: 25px;
-        }
-
-
-        .welcome-label {
-
-            display: inline-block;
-
-            padding: 7px 12px;
-
-            background: var(--soft-blue);
-
-            color: var(--blue);
-
-            border-radius: 50px;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-            letter-spacing: 0.5px;
-        }
-
-
-        .welcome h1 {
-
-            margin-top: 15px;
-
-            font-size: 34px;
-
-            line-height: 1.2;
-
-            letter-spacing: -0.8px;
-
-            color: var(--navy);
-        }
-
-
-        .welcome p {
-
-            margin-top: 7px;
-
-            font-size: 13px;
-
-            color: var(--muted);
-        }
-
-
-        /* =========================
-           PROFILE CARD
-        ========================== */
-
-        .profile-card {
-
-            background: white;
-
-            border: 1px solid #E1E9F2;
-
-            border-radius: 22px;
-
-            padding: 31px;
-
-            box-shadow:
-                0 15px 45px
-                rgba(23, 35, 60, 0.07);
-        }
-
-
-        /* =========================
-           PROFILE TOP
-        ========================== */
-
-        .profile-top {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 17px;
-
-            padding-bottom: 25px;
-
-            border-bottom: 1px solid #EDF2F7;
-        }
-
-
-        .avatar {
-
-            width: 66px;
-
-            height: 66px;
-
-            flex-shrink: 0;
-
-            border-radius: 50%;
-
-            background: var(--soft-blue);
-
-            color: var(--blue);
-
-            border: 1px solid #D6E5FA;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 25px;
-
-            font-weight: 800;
-        }
-
-
-        .profile-top h2 {
-
-            font-size: 20px;
-
-            color: var(--navy);
-        }
-
-
-        .citizen-id {
-
-            margin-top: 6px;
-
-            font-size: 11px;
-
-            color: var(--muted);
-
-            font-weight: 600;
-        }
-
-
-        .verified {
-
-            margin-left: auto;
-
-            padding: 8px 12px;
-
-            border-radius: 20px;
-
-            background: var(--soft-blue);
-
-            color: var(--blue);
-
-            font-size: 10px;
-
-            font-weight: 700;
-
-            white-space: nowrap;
-        }
-
-
-        /* =========================
-           DETAILS
-        ========================== */
-
-        .details {
-
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 15px;
-
-            margin-top: 25px;
-        }
-
-
-        .detail {
-
-            background: #F8FAFD;
-
-            border: 1px solid #E8EEF5;
-
-            border-radius: 12px;
-
-            padding: 17px;
-        }
-
-
-        .detail small {
-
-            display: block;
-
-            margin-bottom: 8px;
-
-            color: #94A3B8;
-
-            font-size: 9px;
-
-            font-weight: 800;
-
-            letter-spacing: 0.5px;
-
-            text-transform: uppercase;
-        }
-
-
-        .detail strong {
-
-            color: var(--navy);
-
-            font-size: 13px;
-
-            font-weight: 700;
-        }
-
-
-        /* =========================
-           CIVIC POINTS
-        ========================== */
-
-        .points {
-
-            color: var(--blue) !important;
-        }
-
-
-        /* =========================
-           INFO
-        ========================== */
-
-        .profile-info {
-
-            margin-top: 20px;
-
-            padding: 14px 16px;
-
-            border-radius: 11px;
-
-            background: var(--soft-blue);
-
-            color: #49617E;
-
-            font-size: 11px;
-
-            line-height: 1.65;
-        }
-
-
-        .profile-info strong {
-
-            color: var(--blue);
-        }
-
-
-        /* =========================
-           ACTIONS
-        ========================== */
-
-        .actions {
-
-            display: flex;
-
-            gap: 12px;
-
-            margin-top: 27px;
-        }
-
-
-        .btn {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            min-height: 45px;
-
-            padding: 0 20px;
-
-            border-radius: 10px;
-
-            font-family: inherit;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            text-decoration: none;
-
-            transition: 0.2s;
-        }
-
-
-        .primary {
-
-            background: var(--blue);
-
-            color: white;
-
-            box-shadow:
-                0 7px 18px
-                rgba(33, 111, 232, 0.15);
-        }
-
-
-        .primary:hover {
-
-            background: var(--blue-dark);
-
+        .primary-button:hover {
+            background: #1d4ed8;
             transform: translateY(-1px);
         }
 
-
-        .secondary {
-
-            background: white;
-
-            color: var(--blue);
-
-            border: 1px solid #D5E3F3;
+        .primary-button:active {
+            transform: translateY(0);
         }
 
+        /* ================= TERMS ================= */
 
-        .secondary:hover {
-
-            background: var(--soft-blue);
-
-            border-color: #C7DAF2;
-        }
-
-
-        /* =========================
-           FOOT NOTE
-        ========================== */
-
-        .bottom-note {
-
+        .terms {
             text-align: center;
-
-            margin-top: 25px;
-
-            font-size: 10px;
-
-            color: #94A3B8;
+            color: #8092a7;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 20px;
         }
 
+        /* ================= BACK LINK ================= */
 
-        /* =========================
-           MOBILE
-        ========================== */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 28px;
 
-        @media (max-width: 650px) {
+            color: #46617d;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-            .navbar {
+        .back-link:hover {
+            color: #2563eb;
+        }
 
-                padding: 0 20px;
-            }
+        /* ================= SIGNUP ================= */
 
+        .signup-form {
+            display: none;
+        }
 
-            .container {
+        .signup-form.active {
+            display: block;
+        }
 
-                margin-top: 35px;
-            }
+        .login-form.hidden {
+            display: none;
+        }
 
+        /* ================= RESPONSIVE ================= */
 
-            .welcome h1 {
+        @media (max-width: 1000px) {
 
-                font-size: 28px;
-            }
-
-
-            .profile-card {
-
-                padding: 23px;
-            }
-
-
-            .profile-top {
-
-                align-items: flex-start;
-
-                flex-wrap: wrap;
-            }
-
-
-            .verified {
-
-                margin-left: 0;
-
-                width: 100%;
-
-                text-align: center;
-            }
-
-
-            .details {
-
+            .login-container {
                 grid-template-columns: 1fr;
+                max-width: 650px;
             }
 
-
-            .actions {
-
-                flex-direction: column;
+            .left-panel {
+                min-height: 430px;
+                padding: 42px;
             }
 
+            .left-content {
+                margin-top: 70px;
+            }
 
-            .btn {
+            .left-content h1 {
+                font-size: 44px;
+            }
 
-                width: 100%;
+            .left-footer {
+                left: 42px;
+                bottom: 35px;
+            }
+
+            .right-panel {
+                padding: 50px 42px;
             }
         }
 
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .login-container {
+                border-radius: 25px;
+            }
+
+            .left-panel {
+                min-height: 390px;
+                padding: 30px;
+            }
+
+            .logo-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 25px;
+            }
+
+            .logo-name {
+                font-size: 23px;
+            }
+
+            .left-content {
+                margin-top: 55px;
+            }
+
+            .left-content h1 {
+                font-size: 37px;
+                letter-spacing: -1px;
+            }
+
+            .left-content p {
+                font-size: 14px;
+            }
+
+            .left-footer {
+                left: 30px;
+                right: 30px;
+                bottom: 28px;
+                font-size: 12px;
+            }
+
+            .check-box {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .right-panel {
+                padding: 38px 25px;
+            }
+
+            .right-panel h2 {
+                font-size: 31px;
+            }
+        }
+
+        /* ================= SIGNUP FLOW ADDITIONS ================= */
+        .field-note {
+            margin-top: 8px;
+            color: #7a8da5;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .otp-section {
+            margin-top: 4px;
+            padding: 18px;
+            border: 1px solid #dbe7f4;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #f7fbff, #eef6ff);
+        }
+
+        .secondary-action {
+            margin-top: 2px;
+        }
+
+        .demo-note {
+            margin-top: 10px;
+            text-align: center;
+            color: #7186a0;
+            font-size: 12px;
+        }
+
+        .verified-badge {
+            margin: 16px 0;
+            padding: 13px 16px;
+            border-radius: 12px;
+            background: #e9f8f0;
+            color: #087a50;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .citizen-id-box {
+            margin: 16px 0 20px;
+            padding: 18px;
+            border-radius: 16px;
+            border: 1px solid #cfe0f4;
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+            text-align: center;
+        }
+
+        .citizen-id-label {
+            display: block;
+            color: #58708c;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            margin-bottom: 7px;
+        }
+
+        .citizen-id-box strong {
+            display: block;
+            color: #0f4c81;
+            font-size: 25px;
+            letter-spacing: 1.5px;
+        }
+
+        .citizen-id-help {
+            display: block;
+            margin-top: 7px;
+            color: #7186a0;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .password-section {
+            margin-top: 4px;
+        }
+
+        /* citizen.js creates the password eye wrapper dynamically. */
+        .password-toggle-wrapper {
+            position: relative;
+            width: 100%;
+        }
     </style>
-
 </head>
-
 
 <body>
 
+    <div class="login-container">
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+        <!-- ================= LEFT SIDE ================= -->
 
-    <header class="navbar">
+        <section class="left-panel">
 
-        <div class="logo">
-
-            <div class="logo-icon">
-                C
+            <div class="logo">
+                <div class="logo-icon">C</div>
+                <div class="logo-name">CivicConnect</div>
             </div>
 
-            <span>
-                CivicConnect
-            </span>
+            <div class="left-content">
 
-        </div>
-
-
-        <button
-            class="logout"
-            onclick="logout()">
-
-            Logout
-
-        </button>
-
-    </header>
-
-
-
-    <!-- =========================
-         MAIN
-    ========================= -->
-
-    <main class="container">
-
-
-        <div class="welcome">
-
-            <span class="welcome-label">
-                CITIZEN PROFILE
-            </span>
-
-
-            <h1 id="welcomeText">
-                Welcome
-            </h1>
-
-
-            <p>
-                Your CivicConnect citizen account
-            </p>
-
-        </div>
-
-
-
-        <!-- =========================
-             PROFILE CARD
-        ========================= -->
-
-        <section class="profile-card">
-
-
-            <div class="profile-top">
-
-
-                <!-- Avatar -->
-
-                <div
-                    class="avatar"
-                    id="avatar">
-
-                    C
-
+                <div class="portal-badge">
+                    CITIZEN PORTAL
                 </div>
 
+                <h1>
+                    Your civic voice,
+                    connected.
+                </h1>
 
-                <!-- Name -->
-
-                <div>
-
-                    <h2 id="citizenName">
-                        Citizen
-                    </h2>
-
-
-                    <p
-                        class="citizen-id"
-                        id="citizenId">
-
-                        Citizen ID
-
-                    </p>
-
-                </div>
-
-
-                <!-- Verification -->
-
-                <div class="verified">
-
-                    ✓ Mobile Verified
-
-                </div>
+                <p>
+                    Sign in to report grievances, manage your complaints
+                    and stay connected with their progress.
+                </p>
 
             </div>
 
+            <div class="left-footer">
 
-
-            <!-- =========================
-                 DETAILS
-            ========================== -->
-
-            <div class="details">
-
-
-                <div class="detail">
-
-                    <small>
-                        Full Name
-                    </small>
-
-                    <strong id="profileName">
-                        -
-                    </strong>
-
+                <div class="check-box">
+                    ✓
                 </div>
 
-
-                <div class="detail">
-
-                    <small>
-                        Mobile Number
-                    </small>
-
-                    <strong id="citizenPhone">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div class="detail">
-
-                    <small>
-                        Citizen ID
-                    </small>
-
-                    <strong id="profileCitizenId">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div class="detail">
-
-                    <small>
-                        Civic Points
-                    </small>
-
-                    <strong
-                        id="civicPoints"
-                        class="points">
-
-                        0 Points
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =========================
-                 INFORMATION
-            ========================== -->
-
-            <div class="profile-info">
-
-                <strong>✓ Account connected.</strong>
-
-                Your unique Citizen ID connects your
-                account with your CivicConnect complaints.
-                Your name is not used as the unique identifier.
-
-            </div>
-
-
-
-            <!-- =========================
-                 ACTION BUTTONS
-            ========================== -->
-
-            <div class="actions">
-
-
-                <!-- GO TO HOME PAGE -->
-
-                <a
-                    href="index.html"
-                    class="btn primary">
-
-                    Report a Grievance
-
-                </a>
-
-
-                <!-- GO TO TRACKING SECTION -->
-
-                <a
-                    href="index.html#track"
-                    class="btn secondary">
-
-                    Track Complaint
-
-                </a>
+                <span>
+                    Your citizen profile keeps your complaint history connected.
+                </span>
 
             </div>
 
         </section>
 
 
+        <!-- ================= RIGHT SIDE ================= -->
 
-        <p class="bottom-note">
+        <section class="right-panel">
 
-            CivicConnect • Smart Governance & Citizen Services
+            <h2 id="formTitle">
+                Welcome back
+            </h2>
 
-        </p>
-
-    </main>
-
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
-    <script>
-
-        /* =========================
-           CHECK LOGIN
-        ========================== */
-
-        const loggedIn =
-            sessionStorage.getItem(
-                "civicconnectLoggedIn"
-            );
+            <p class="subtitle" id="formSubtitle">
+                Sign in to your CivicConnect account.
+            </p>
 
 
-        const storedAccount =
-            localStorage.getItem(
-                "civicconnectCitizen"
-            );
+            <!-- ================= TABS ================= -->
+
+            <div class="tabs">
+
+                <button
+                    type="button"
+                    class="tab active"
+                    id="loginTab"
+                    onclick="showLogin()">
+                    Login
+                </button>
+
+                <button
+                    type="button"
+                    class="tab"
+                    id="signupTab"
+                    onclick="showSignup()">
+                    Create Account
+                </button>
+
+            </div>
 
 
-        if (!loggedIn || !storedAccount) {
+            <!-- ================= MESSAGE ================= -->
 
-            window.location.href =
-                "login.html";
+            <div
+                id="loginMessage"
+                class="message">
+            </div>
 
-        }
-
-
-        /* =========================
-           LOAD CITIZEN
-        ========================== */
-
-        let citizen;
-
-        try {
-
-            citizen =
-                JSON.parse(storedAccount);
-
-        } catch (error) {
-
-            localStorage.removeItem(
-                "civicconnectCitizen"
-            );
-
-            sessionStorage.clear();
-
-            window.location.href =
-                "login.html";
-        }
+            <div
+                id="signupMessage"
+                class="message">
+            </div>
 
 
-        /* =========================
-           DISPLAY CITIZEN
-        ========================== */
+            <!-- ================= LOGIN FORM ================= -->
 
-        if (citizen) {
+            <form
+                id="loginForm"
+                class="login-form"
+                onsubmit="handleLogin(event)">
 
+                <div class="form-group">
 
-            document.getElementById(
-                "welcomeText"
-            ).textContent =
-                "Welcome, " + citizen.name;
+                    <label for="loginCitizenId">
+                        Citizen ID
+                    </label>
 
+                    <input
+                        type="tel"
+                        id="loginCitizenId"
+                        placeholder="Enter your Citizen ID"
+                        autocomplete="username"
+                        required>
 
-            document.getElementById(
-                "citizenName"
-            ).textContent =
-                citizen.name;
-
-
-            document.getElementById(
-                "profileName"
-            ).textContent =
-                citizen.name;
+                </div>
 
 
-            document.getElementById(
-                "citizenPhone"
-            ).textContent =
-                citizen.phone;
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+                </div>
 
 
-            document.getElementById(
-                "citizenId"
-            ).textContent =
-                citizen.citizenId;
+                <a
+                    href="#"
+                    class="forgot"
+                    onclick="forgotPassword(); return false;">
+                    Forgot password?
+                </a>
 
 
-            document.getElementById(
-                "profileCitizenId"
-            ).textContent =
-                citizen.citizenId;
+                <button
+                    type="submit"
+                    class="primary-button">
+                    Login to CivicConnect
+                </button>
 
 
-            document.getElementById(
-                "civicPoints"
-            ).textContent =
-                (citizen.civicPoints || 0) +
-                " Points";
+                <p class="terms">
+                    By continuing, you agree to use CivicConnect responsibly
+                    and provide accurate information.
+                </p>
+
+            </form>
 
 
-            document.getElementById(
-                "avatar"
-            ).textContent =
-                citizen.name
-                    .charAt(0)
-                    .toUpperCase();
+            <!-- ================= SIGNUP FORM ================= -->
 
-        }
+            <form
+                id="signupForm"
+                class="signup-form"
+                onsubmit="handleSignup(event)">
+
+                <div id="otpSendSection">
+
+                    <div class="form-group">
+                        <label for="signupName">
+                            Full Name
+                        </label>
+                        <input
+                            type="text"
+                            id="signupName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupAadhaar">
+                            Aadhaar Number
+                        </label>
+                        <input
+                            type="text"
+                            id="signupAadhaar"
+                            inputmode="numeric"
+                            maxlength="12"
+                            placeholder="Enter your 12-digit Aadhaar number"
+                            autocomplete="off"
+                            required>
+                        <p class="field-note">
+                            Your Aadhaar number is used only for identity verification in this prototype and is not stored as your Citizen ID.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupMobile">
+                            Aadhaar-linked Mobile Number
+                        </label>
+                        <input
+                            type="tel"
+                            id="signupMobile"
+                            inputmode="numeric"
+                            maxlength="10"
+                            placeholder="Enter your 10-digit mobile number"
+                            autocomplete="tel"
+                            required>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        onclick="generateOTP()">
+                        Generate OTP
+                    </button>
+
+                </div>
+
+                <div id="otpSection" class="otp-section" style="display:none;">
+                    <div class="form-group">
+                        <label for="signupOtp">
+                            Enter OTP
+                        </label>
+                        <input
+                            type="text"
+                            id="signupOtp"
+                            inputmode="numeric"
+                            maxlength="6"
+                            placeholder="Enter 6-digit OTP"
+                            autocomplete="one-time-code">
+                    </div>
+
+                    <button
+                        type="button"
+                        class="primary-button secondary-action"
+                        onclick="verifyOTP()">
+                        Verify OTP
+                    </button>
+
+                    <p class="demo-note">
+                        Prototype demo OTP: <strong>123456</strong>
+                    </p>
+                </div>
+
+                <div id="verifiedBadge" class="verified-badge" style="display:none;">
+                    ✓ Identity verified successfully
+                </div>
+
+                <div id="citizenIdBox" class="citizen-id-box" style="display:none;">
+                    <span class="citizen-id-label">Your Citizen ID</span>
+                    <strong id="generatedCitizenId">—</strong>
+                    <span class="citizen-id-help">This ID will be used to sign in and connect your complaint history.</span>
+                </div>
+
+                <div id="passwordSection" class="password-section" style="display:none;">
+
+                    <div class="form-group">
+                        <label for="signupPassword">
+                            Create Password
+                        </label>
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            placeholder="Create a password"
+                            autocomplete="new-password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupConfirmPassword">
+                            Confirm Password
+                        </label>
+                        <input
+                            type="password"
+                            id="signupConfirmPassword"
+                            placeholder="Re-enter your password"
+                            autocomplete="new-password">
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="primary-button">
+                        Create CivicConnect Account
+                    </button>
+
+                    <p class="terms">
+                        Your account helps keep your complaints connected to your Citizen ID.
+                    </p>
+
+                </div>
+
+            </form>
 
 
-        /* =========================
-           LOGOUT
-        ========================== */
+            <!-- ================= BACK ================= -->
 
-        function logout() {
+            <a
+                href="index.html"
+                class="back-link">
+                ← Back to CivicConnect
+            </a>
 
-            sessionStorage.removeItem(
-                "civicconnectLoggedIn"
-            );
+        </section>
 
-
-            sessionStorage.removeItem(
-                "civicconnectCitizenId"
-            );
+    </div>
 
 
-            window.location.href =
-                "login.html";
-        }
+    <!-- Your existing JavaScript -->
 
-    </script>
+    <script src="citizen.js"></script>
+
+
+    <!-- Password visibility is handled by citizen.js -->
 
 </body>
 

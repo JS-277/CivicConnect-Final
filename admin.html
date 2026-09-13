@@ -483,6 +483,89 @@
             color: #dc2626;
         }
 
+        /* ================= EVIDENCE ================= */
+
+        .evidence-box {
+            background: #f8fafc;
+            border: 1px solid #e7edf3;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .evidence-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .evidence-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #edf4ff;
+            color: #1769d5;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .evidence-name {
+            color: #60758d;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        .evidence-image {
+            display: block;
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            border: 1px solid #dbe4ee;
+            border-radius: 12px;
+            background: #eef3f8;
+            cursor: zoom-in;
+        }
+
+        .evidence-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .evidence-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0 16px;
+            border: none;
+            border-radius: 9px;
+            background: #1769d5;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .evidence-btn.secondary {
+            background: #edf4ff;
+            color: #1769d5;
+        }
+
+        .evidence-empty {
+            color: #71859a;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
         /* ================= RESPONSIVE ================= */
 
         @media (max-width: 900px) {
@@ -791,7 +874,10 @@
         ===================================================== */
 
         const API_URL =
-            "https://civicconnect-prototype-production.up.railway.app/api/complaints";
+            (location.hostname === "localhost" ||
+             location.hostname === "127.0.0.1")
+                ? "http://localhost:8080/api/complaints"
+                : "https://civicconnect-prototype-production.up.railway.app/api/complaints";
 
 
         let complaints = [];
@@ -820,7 +906,13 @@
             try {
 
                 const response =
-                    await fetch(API_URL);
+                    await fetch(API_URL + "?t=" + Date.now(), {
+                        method: "GET",
+                        cache: "no-store",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    });
 
                 if (!response.ok) {
                     throw new Error(
@@ -828,23 +920,46 @@
                     );
                 }
 
-                complaints =
+                const data =
                     await response.json();
 
-                updateStats();
+                if (!Array.isArray(data)) {
+                    throw new Error(
+                        "Invalid complaint data received from server."
+                    );
+                }
 
+                complaints = data;
+
+                console.log(
+                    "CivicConnect admin: loaded",
+                    complaints.length,
+                    "complaints"
+                );
+
+                console.log(
+                    "Complaint IDs:",
+                    complaints.map(function (complaint) {
+                        return complaint.complaintId;
+                    })
+                );
+
+                updateStats();
                 renderComplaints();
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "CivicConnect admin load error:",
+                    error
+                );
 
                 table.innerHTML = `
                     <tr>
                         <td colspan="7"
                             style="text-align:center;padding:45px;color:#dc2626;">
-                            Unable to load complaints.
-                            Please try Refresh again.
+                            Unable to load complaints.<br><br>
+                            Please make sure the CivicConnect backend is running on port 8080.
                         </td>
                     </tr>
                 `;
@@ -852,7 +967,6 @@
             }
 
         }
-
 
         /* =====================================================
            STATISTICS
@@ -1418,6 +1532,19 @@
                 </section>
 
 
+                <!-- EVIDENCE / ATTACHMENTS -->
+
+                <section class="detail-section">
+                    <div class="section-title">
+                        Evidence / Attachments
+                    </div>
+
+                    <div class="evidence-box">
+                        ${renderEvidence(complaint)}
+                    </div>
+                </section>
+
+
                 <!-- SUBMISSION -->
 
                 <section class="detail-section">
@@ -1748,6 +1875,128 @@
            HELPERS
         ===================================================== */
 
+        /* =====================================================
+           EVIDENCE HELPERS
+        ===================================================== */
+
+        function getEvidenceUrl(fileName) {
+            if (!fileName) {
+                return "";
+            }
+
+            const cleanFileName = String(fileName)
+                .replace(/\\/g, "/")
+                .split("/")
+                .pop();
+
+            if (!cleanFileName) {
+                return "";
+            }
+
+            const apiBase = API_URL.replace(
+                /\/api\/complaints\/?$/i,
+                ""
+            );
+
+            return apiBase + "/uploads/" +
+                encodeURIComponent(cleanFileName);
+        }
+
+        function renderEvidence(complaint) {
+            const evidenceType = String(
+                complaint.evidenceType || ""
+            ).trim().toUpperCase();
+
+            const evidenceFile = String(
+                complaint.evidenceFile || ""
+            ).trim();
+
+            if (!evidenceFile) {
+                return `
+                    <div class="evidence-empty">
+                        No evidence or attachment was submitted with this complaint.
+                    </div>
+                `;
+            }
+
+            const evidenceUrl = getEvidenceUrl(evidenceFile);
+            const safeName = escapeHtml(
+                evidenceFile.split(/[/\\]/).pop()
+            );
+
+            if (evidenceType === "IMAGE") {
+                return `
+                    <div class="evidence-meta">
+                        <span class="evidence-type">🖼️ Image Evidence</span>
+                        <span class="evidence-name">${safeName}</span>
+                    </div>
+
+                    <a href="${evidenceUrl}" target="_blank" rel="noopener noreferrer" title="Open image in a new tab">
+                        <img
+                            class="evidence-image"
+                            src="${evidenceUrl}"
+                            alt="Complaint evidence"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                        >
+                    </a>
+
+                    <div class="evidence-empty" style="display:none;margin-top:12px;">
+                        The uploaded image could not be loaded.
+                    </div>
+
+                    <div class="evidence-actions">
+                        <a
+                            class="evidence-btn"
+                            href="${evidenceUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Open Full Image
+                        </a>
+                    </div>
+                `;
+            }
+
+            if (evidenceType === "PDF" || /\.pdf$/i.test(evidenceFile)) {
+                return `
+                    <div class="evidence-meta">
+                        <span class="evidence-type">📄 PDF Evidence</span>
+                        <span class="evidence-name">${safeName}</span>
+                    </div>
+
+                    <div class="evidence-actions" style="margin-top:0;">
+                        <a
+                            class="evidence-btn"
+                            href="${evidenceUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Open PDF
+                        </a>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="evidence-meta">
+                    <span class="evidence-type">📎 Attachment</span>
+                    <span class="evidence-name">${safeName}</span>
+                </div>
+
+                <div class="evidence-actions" style="margin-top:0;">
+                    <a
+                        class="evidence-btn"
+                        href="${evidenceUrl}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Open Attachment
+                    </a>
+                </div>
+            `;
+        }
+
+
         function displayValue(value) {
 
             if (
@@ -1786,23 +2035,23 @@
                 return "Not available";
             }
 
+            const raw = String(value).trim();
 
-            const date =
-                new Date(value);
+            /*
+             * The backend/database already provides the complaint's
+             * submission date/time. Do not add or subtract 5 hours 30 minutes
+             * here, because doing so can shift the actual stored time.
+             *
+             * For a timezone-less database value, interpret it as the
+             * browser's local time (the normal behaviour on an India-based
+             * machine) and display it without changing the time.
+             */
+            const normalized = raw.replace(" ", "T");
+            const date = new Date(normalized);
 
-
-            if (
-                Number.isNaN(
-                    date.getTime()
-                )
-            ) {
-
-                return escapeHtml(
-                    String(value)
-                );
-
+            if (Number.isNaN(date.getTime())) {
+                return escapeHtml(raw);
             }
-
 
             return date.toLocaleString(
                 "en-IN",
@@ -1811,12 +2060,12 @@
                     month: "short",
                     year: "numeric",
                     hour: "2-digit",
-                    minute: "2-digit"
+                    minute: "2-digit",
+                    hour12: true
                 }
             );
 
         }
-
 
         /* =====================================================
            SEARCH + FILTER

@@ -31,8 +31,6 @@
             color: #092b55;
         }
 
-        /* ================= MAIN CONTAINER ================= */
-
         .login-container {
             width: 100%;
             max-width: 1330px;
@@ -45,7 +43,7 @@
             box-shadow: 0 25px 70px rgba(20, 65, 110, 0.15);
         }
 
-        /* ================= LEFT PANEL ================= */
+        /* LEFT PANEL */
 
         .left-panel {
             position: relative;
@@ -86,7 +84,7 @@
             left: -130px;
         }
 
-        /* ================= LOGO ================= */
+        /* LOGO */
 
         .logo {
             display: flex;
@@ -115,7 +113,7 @@
             letter-spacing: -0.7px;
         }
 
-        /* ================= LEFT CONTENT ================= */
+        /* LEFT CONTENT */
 
         .left-content {
             position: relative;
@@ -150,7 +148,7 @@
             max-width: 520px;
         }
 
-        /* ================= LEFT FOOTER ================= */
+        /* LEFT FOOTER */
 
         .left-footer {
             position: absolute;
@@ -178,7 +176,7 @@
             font-size: 25px;
         }
 
-        /* ================= RIGHT PANEL ================= */
+        /* RIGHT PANEL */
 
         .right-panel {
             padding: 66px 78px;
@@ -200,7 +198,7 @@
             margin-bottom: 34px;
         }
 
-        /* ================= TABS ================= */
+        /* TABS */
 
         .tabs {
             width: 100%;
@@ -231,7 +229,7 @@
             box-shadow: 0 4px 12px rgba(30, 70, 110, 0.10);
         }
 
-        /* ================= MESSAGES ================= */
+        /* MESSAGES */
 
         .message {
             display: none;
@@ -256,7 +254,7 @@
             color: #c0392b;
         }
 
-        /* ================= FORMS ================= */
+        /* FORMS */
 
         form {
             width: 100%;
@@ -293,7 +291,7 @@
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
         }
 
-        /* ================= PASSWORD ================= */
+        /* PASSWORD */
 
         .password-wrapper {
             position: relative;
@@ -338,7 +336,7 @@
             stroke-linejoin: round;
         }
 
-        /* ================= FORGOT PASSWORD ================= */
+        /* FORGOT PASSWORD */
 
         .forgot {
             display: block;
@@ -357,7 +355,7 @@
             text-decoration: underline;
         }
 
-        /* ================= PRIMARY BUTTON ================= */
+        /* BUTTON */
 
         .primary-button {
             width: 100%;
@@ -388,7 +386,25 @@
             transform: translateY(0);
         }
 
-        /* ================= TERMS ================= */
+        .secondary-button {
+            width: 100%;
+            height: 52px;
+            border: 1px solid #2563eb;
+            border-radius: 14px;
+            background: white;
+            color: #2563eb;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .secondary-button:hover {
+            background: #f1f6ff;
+        }
+
+        /* TERMS */
 
         .terms {
             text-align: center;
@@ -398,7 +414,7 @@
             margin-top: 20px;
         }
 
-        /* ================= BACK LINK ================= */
+        /* BACK */
 
         .back-link {
             display: block;
@@ -415,7 +431,7 @@
             color: #2563eb;
         }
 
-        /* ================= SIGNUP ================= */
+        /* SIGNUP */
 
         .signup-form {
             display: none;
@@ -429,7 +445,77 @@
             display: none;
         }
 
-        /* ================= RESPONSIVE ================= */
+        /* OTP */
+
+        .otp-section {
+            display: none;
+        }
+
+        .otp-section.show {
+            display: block;
+        }
+
+        .otp-info {
+            background: #eef6ff;
+            border: 1px solid #d6e7ff;
+            color: #315b83;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .verified-badge {
+            display: none;
+            background: #e8f7f0;
+            color: #087a50;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .verified-badge.show {
+            display: block;
+        }
+
+        .citizen-id-box {
+            display: none;
+            background: #f1f7ff;
+            border: 1px solid #cfe2ff;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 22px;
+            text-align: center;
+        }
+
+        .citizen-id-box.show {
+            display: block;
+        }
+
+        .citizen-id-label {
+            font-size: 12px;
+            color: #58708c;
+            margin-bottom: 6px;
+        }
+
+        .citizen-id-value {
+            font-size: 23px;
+            font-weight: 800;
+            color: #2563eb;
+            letter-spacing: 1px;
+        }
+
+        .small-note {
+            color: #8092a7;
+            font-size: 11px;
+            line-height: 1.5;
+            margin-top: 7px;
+        }
+
+        /* RESPONSIVE */
 
         @media (max-width: 1000px) {
 
@@ -527,7 +613,7 @@
 
     <div class="login-container">
 
-        <!-- ================= LEFT SIDE ================= -->
+        <!-- LEFT SIDE -->
 
         <section class="left-panel">
 
@@ -569,7 +655,7 @@
         </section>
 
 
-        <!-- ================= RIGHT SIDE ================= -->
+        <!-- RIGHT SIDE -->
 
         <section class="right-panel">
 
@@ -582,7 +668,7 @@
             </p>
 
 
-            <!-- ================= TABS ================= -->
+            <!-- TABS -->
 
             <div class="tabs">
 
@@ -605,7 +691,7 @@
             </div>
 
 
-            <!-- ================= MESSAGE ================= -->
+            <!-- MESSAGES -->
 
             <div
                 id="loginMessage"
@@ -618,7 +704,7 @@
             </div>
 
 
-            <!-- ================= LOGIN FORM ================= -->
+            <!-- LOGIN FORM -->
 
             <form
                 id="loginForm"
@@ -627,16 +713,15 @@
 
                 <div class="form-group">
 
-                    <label for="loginPhone">
-                        Mobile Number
+                    <label for="loginCitizenId">
+                        Citizen ID
                     </label>
 
                     <input
-                        type="tel"
-                        id="loginPhone"
-                        placeholder="Enter your mobile number"
-                        maxlength="10"
-                        autocomplete="tel"
+                        type="text"
+                        id="loginCitizenId"
+                        placeholder="Enter your Citizen ID"
+                        autocomplete="username"
                         required>
 
                 </div>
@@ -662,8 +747,6 @@
                             class="eye-button"
                             onclick="togglePassword('loginPassword', this)"
                             aria-label="Show password">
-
-                            <!-- Eye icon -->
 
                             <svg
                                 viewBox="0 0 24 24"
@@ -711,12 +794,14 @@
             </form>
 
 
-            <!-- ================= SIGNUP FORM ================= -->
+            <!-- SIGNUP FORM -->
 
             <form
                 id="signupForm"
                 class="signup-form"
                 onsubmit="handleSignup(event)">
+
+                <!-- FULL NAME -->
 
                 <div class="form-group">
 
@@ -734,83 +819,228 @@
                 </div>
 
 
+                <!-- AADHAAR NUMBER -->
+
                 <div class="form-group">
 
-                    <label for="signupPhone">
-                        Mobile Number
+                    <label for="signupAadhaar">
+                        Aadhaar Number
                     </label>
 
                     <input
-                        type="tel"
-                        id="signupPhone"
-                        placeholder="Enter your 10-digit mobile number"
-                        maxlength="10"
-                        autocomplete="tel"
+                        type="text"
+                        id="signupAadhaar"
+                        placeholder="Enter your 12-digit Aadhaar number"
+                        maxlength="12"
+                        inputmode="numeric"
+                        autocomplete="off"
                         required>
+
+                    <p class="small-note">
+                        Your Aadhaar number is used only for identity verification
+                        in this prototype and is not stored as your Citizen ID.
+                    </p>
 
                 </div>
 
 
-                <div class="form-group">
+                <!-- OTP BUTTON -->
 
-                    <label for="signupPassword">
-                        Create Password
-                    </label>
+                <div
+                    id="otpSendSection"
+                    class="form-group">
 
-                    <div class="password-wrapper">
+                    <button
+                        type="button"
+                        class="primary-button"
+                        onclick="generateOTP()">
+                        Generate OTP
+                    </button>
+
+                </div>
+
+
+                <!-- OTP SECTION -->
+
+                <div
+                    id="otpSection"
+                    class="otp-section">
+
+                    <div class="otp-info">
+                        An OTP will be used to verify the Aadhaar-linked identity.
+                        For this prototype, OTP verification is simulated.
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="signupOtp">
+                            Enter OTP
+                        </label>
 
                         <input
-                            type="password"
-                            id="signupPassword"
-                            placeholder="Create a password"
-                            autocomplete="new-password"
-                            required>
+                            type="text"
+                            id="signupOtp"
+                            placeholder="Enter 6-digit OTP"
+                            maxlength="6"
+                            inputmode="numeric"
+                            autocomplete="one-time-code">
 
-                        <button
-                            type="button"
-                            class="eye-button"
-                            onclick="togglePassword('signupPassword', this)"
-                            aria-label="Show password">
+                    </div>
 
-                            <svg
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        onclick="verifyOTP()">
+                        Verify OTP
+                    </button>
 
-                                <path
-                                    d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
-                                </path>
+                </div>
 
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="3">
-                                </circle>
 
-                            </svg>
+                <!-- VERIFIED -->
 
-                        </button>
+                <div
+                    id="verifiedBadge"
+                    class="verified-badge">
+                    ✓ Identity Verified Successfully
+                </div>
 
+
+                <!-- AUTOMATIC CITIZEN ID -->
+
+                <div
+                    id="citizenIdBox"
+                    class="citizen-id-box">
+
+                    <div class="citizen-id-label">
+                        Your automatically generated Citizen ID
+                    </div>
+
+                    <div
+                        id="generatedCitizenId"
+                        class="citizen-id-value">
+                        —
+                    </div>
+
+                    <div class="small-note">
+                        Keep this Citizen ID safe. You will use it to log in.
                     </div>
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="primary-button">
-                    Create CivicConnect Account
-                </button>
+                <!-- PASSWORD -->
+
+                <div
+                    id="passwordSection"
+                    style="display:none;">
+
+                    <div class="form-group">
+
+                        <label for="signupPassword">
+                            Create Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="signupPassword"
+                                placeholder="Create a password"
+                                autocomplete="new-password">
+
+                            <button
+                                type="button"
+                                class="eye-button"
+                                onclick="togglePassword('signupPassword', this)"
+                                aria-label="Show password">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+
+                                    <path
+                                        d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
+                                    </path>
+
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="3">
+                                    </circle>
+
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="signupConfirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="signupConfirmPassword"
+                                placeholder="Confirm your password"
+                                autocomplete="new-password">
+
+                            <button
+                                type="button"
+                                class="eye-button"
+                                onclick="togglePassword('signupConfirmPassword', this)"
+                                aria-label="Show password">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+
+                                    <path
+                                        d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
+                                    </path>
+
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="3">
+                                    </circle>
+
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button">
+                        Create CivicConnect Account
+                    </button>
+
+                </div>
 
 
                 <p class="terms">
-                    Your account helps keep your complaints
-                    connected to your Citizen ID.
+                    Your Citizen ID connects your account with your CivicConnect
+                    complaint history.
                 </p>
 
             </form>
 
 
-            <!-- ================= BACK ================= -->
+            <!-- BACK -->
 
             <a
                 href="index.html"
@@ -823,12 +1053,12 @@
     </div>
 
 
-    <!-- Your existing JavaScript -->
+    <!-- JavaScript -->
 
     <script src="citizen.js"></script>
 
 
-    <!-- Eye icon functionality -->
+    <!-- PASSWORD EYE -->
 
     <script>
 
@@ -854,9 +1084,7 @@
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
 
-                        <path
-                            d="M3 3l18 18">
-                        </path>
+                        <path d="M3 3l18 18"></path>
 
                         <path
                             d="M10.6 10.6a2 2 0 0 0 2.8 2.8">

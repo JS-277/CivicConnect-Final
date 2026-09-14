@@ -2248,7 +2248,10 @@ if(sessionStorage.getItem("civicconnectLoggedIn") !== "true"){
 </div>
 
 <script>
-const API_URL="https://civicconnect-prototype-production.up.railway.app/api/complaints";
+const API_URL =
+  (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+    ? "http://localhost:8080/api/complaints"
+    : "https://civicconnect-prototype-production.up.railway.app/api/complaints";
 
 let pendingSubmission=false;
 let lastLatitude=null;
@@ -2915,7 +2918,9 @@ async function finalSubmitComplaint(){
       citizen?.name ||
       citizen?.fullName ||
       citizen?.full_name ||
+      citizen?.username ||
       sessionStorage.getItem("civicconnectCitizenName") ||
+      localStorage.getItem("civicconnectCitizenName") ||
       document.getElementById("citizenName")?.value ||
       ""
     ).trim();
@@ -2925,9 +2930,10 @@ async function finalSubmitComplaint(){
       citizen?.mobile ||
       citizen?.mobileNumber ||
       sessionStorage.getItem("civicconnectCitizenPhone") ||
+      localStorage.getItem("civicconnectCitizenPhone") ||
       document.getElementById("phone")?.value ||
       ""
-    ).trim();
+    ).replace(/\D/g, "").slice(-10);
 
     /* Keep hidden compatibility fields synchronized. */
     const nameField=document.getElementById("citizenName");
